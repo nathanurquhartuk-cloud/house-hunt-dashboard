@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4-Bed Detached Search — Bicester &amp; Deddington +15mi</title>
+<style>
+  :root{--bg:#f4f5f7;--card:#fff;--ink:#1a2233;--mut:#6b7280;--acc:#0d6e4f;--accL:#e6f4ef;--warn:#b45309;--warnL:#fef3c7;--line:#e5e7eb;--red:#b91c1c}
+  *{box-sizing:border-box;margin:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);padding:24px}
+  header{max-width:1280px;margin:0 auto 18px}
+  h1{font-size:26px;letter-spacing:-.3px}
+  .sub{color:var(--mut);margin-top:6px;font-size:14px;line-height:1.5}
+  .stats{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0 8px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 16px;font-size:13px;color:var(--mut)}
+  .stat b{display:block;font-size:19px;color:var(--ink)}
+  .bar{max-width:1280px;margin:0 auto 16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .bar button{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:7px 14px;font-size:13px;cursor:pointer;color:var(--ink)}
+  .bar button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .bar select{border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-size:13px;background:var(--card)}
+  .grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(390px,1fr));gap:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+  .imgwrap{position:relative;height:230px;overflow:hidden;background:#dde}
+  .imgwrap img{width:100%;height:100%;object-fit:cover;display:block}
+  .match{position:absolute;top:10px;left:10px;background:rgba(13,110,79,.95);color:#fff;font-size:12px;font-weight:600;padding:4px 10px;border-radius:14px}
+  .match.partial{background:rgba(180,83,9,.95)}
+  .fresh{position:absolute;top:10px;right:10px;background:rgba(26,34,51,.85);color:#fff;font-size:11px;padding:4px 9px;border-radius:12px}
+  .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .addr{font-size:16px;font-weight:650}
+  .area{color:var(--mut);font-size:13px}
+  .prices{display:flex;gap:10px;align-items:stretch}
+  .pbox{flex:1;border-radius:10px;padding:9px 12px;border:1px solid var(--line)}
+  .pbox .l{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut)}
+  .pbox .v{font-size:19px;font-weight:700;margin-top:2px}
+  .pbox.offer{background:var(--accL);border-color:#bfe3d5}
+  .pbox.offer .v{color:var(--acc)}
+  .saving{font-size:11px;color:var(--acc);margin-top:2px}
+  .feats{display:flex;flex-wrap:wrap;gap:6px}
+  .f{font-size:11.5px;padding:4px 9px;border-radius:12px;background:var(--accL);color:var(--acc);font-weight:600}
+  .f.no{background:#fee2e2;color:var(--red);font-weight:500}
+  .f.part{background:var(--warnL);color:var(--warn)}
+  .desc{font-size:13px;color:#374151;line-height:1.55}
+  .why{font-size:12.5px;background:#f8fafc;border:1px dashed var(--line);border-radius:10px;padding:9px 11px;color:#475569;line-height:1.5}
+  .why b{color:var(--ink)}
+  .links{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:4px}
+  .links a{font-size:12.5px;text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:6px 11px;color:var(--ink);font-weight:550}
+  .links a.rm{background:#00deb61a;border-color:#00b894}
+  .links a:hover{background:var(--ink);color:#fff}
+  .dup{font-size:11.5px;color:var(--mut)}
+  footer{max-width:1280px;margin:26px auto 0;font-size:12px;color:var(--mut);line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+</style>
+</head>
+<body>
+<header>
+  <h1>4-Bed Detached House Search — Bicester, Deddington &amp; within 15 miles</h1>
+  <div class="sub">Budget ≤ £600,000 · Wish list: utility room · open-plan kitchen/diner · WC on every floor · master ensuite · garage to convert / already an office · nice area.<br>
+  Compiled 18 Jul 2026 from <b>Rightmove, Zoopla &amp; OnTheMarket</b> (417 raw listings scanned, cross-portal duplicates merged into one card per home). Offer prices are guided by HM Land Registry sold prices (last 2 yrs, detached) for each postcode district plus time-on-market and price-cut signals.</div>
+  <div class="stats">
+    <div class="stat"><b>11</b>shortlisted homes</div>
+    <div class="stat"><b>6</b>match every criterion</div>
+    <div class="stat"><b>19</b>duplicate adverts merged</div>
+    <div class="stat"><b>£475k–£600k</b>asking range</div>
+  </div>
+</header>
+<div class="bar">
+  <button class="on" data-f="all">All (11)</button>
+  <button data-f="full">Full match (6)</button>
+  <button data-f="bicester">Bicester &amp; villages</button>
+  <button data-f="banbury">Deddington / Banbury side</button>
+  <button data-f="other">Brackley · Buckingham · Cotswolds</button>
+  <select id="sort">
+    <option value="match">Sort: best match</option>
+    <option value="priceA">Price low → high</option>
+    <option value="priceD">Price high → low</option>
+    <option value="value">Biggest negotiation room</option>
+  </select>
+</div>
+<div class="grid" id="grid"></div>
+<footer>
+  <b>How to read the offer prices.</b> "Recommended opening offer" is a sensible first bid; expect to land between it and asking. Basis: Land Registry sold prices for detached homes in each district over the last 2 years — OX26 (Bicester) median £430k · OX25 (Ambrosden/Heyford) £562k · OX15 (Bloxham/Bodicote) £460k · OX16 (Banbury) £350k · OX17 (Adderbury) £452k · NN13 (Brackley) £385k · OX7 (Chipping Norton) £570k — adjusted for each home's size, spec, freshness of listing and any price reductions. Always confirm with a viewing, your own comparables and a survey; this is research, not valuation advice. Photos and floorplans are served live from the agents' portals — links open the original adverts.
+</footer>
+<script>
+const P=[
+ {id:"keepers",addr:"Keepers Close, Banbury (Salt Way / Longford Park edge)",area:"banbury",loc:"OX16 · Banbury south, borders Bodicote",price:525000,disp:"£525,000",offer:492500,target:505000,match:6,
+  feats:{u:1,e:1,k:1,w:1,o:1,g:1},gnote:"Study + single garage (convertible)",
+  desc:"Barratt home (~2 yrs old) on the edge of the development overlooking Salt Way. Cloakroom, study, living room and a large kitchen/dining/family room with utility. Four doubles, ensuite master, larger-than-average SW-facing garden, cul-de-sac plot.",
+  why:"<b>On the market since Mar 2025 (16 months)</b> — by far the stalest listing here, which is major leverage. OX16 detached median is just £350k (upper quartile £426k); this carries a new-estate premium but a bid ~6% under asking is well supported. Open at £492,500, walk-away ~£505k.",
+  fresh:"Listed 16 months",img:"https://media.rightmove.co.uk/property-photo/a5264058e/159280028/a5264058e0db5b41024b636d73963ea0.jpeg",
+  fp:"https://media.rightmove.co.uk/dir/property-floorplan/759b5da32/159280028/759b5da324b057b50de16af7201b9023.jpeg",
+  rm:"https://www.rightmove.co.uk/properties/159280028",otm:"https://www.onthemarket.com/details/16704012/",zp:"",agent:"Stanbra Powell",dup:"Also on OnTheMarket (same £525k)"},
+ {id:"tarvers",addr:"Tarvers Way, Adderbury",area:"banbury",loc:"OX17 · 3 mi from Deddington",price:575000,disp:"£575,000",offer:552500,target:562000,match:6,
+  feats:{u:1,e:1,k:1,w:1,o:1,g:1},gnote:"Study + garage & driveway",
+  desc:"Double-fronted stone house, generous plot, NO ONWARD CHAIN. Cloak/WC, living room, open-plan kitchen/dining/family room with utility area, study, galleried landing, master ensuite, larger-than-average garden, countryside views.",
+  why:"OX17 detached median £452k, upper quartile £585k — a stone village house in Adderbury sits near the top band, so asking is fair-ish. One month on market; no chain means the vendor values speed. <b>Open £552,500</b> emphasising proceedability; £560–565k is a good result.",
+  fresh:"Added 16 Jun",img:"https://media.rightmove.co.uk/property-photo/029c35f32/89770350/029c35f32e42bbd7c67d1e925c319785.jpeg",
+  fp:"https://media.rightmove.co.uk/dir/property-floorplan/2e2d4b74a/89770350/2e2d4b74a191942d558ed42fdc8ea531.jpeg",
+  rm:"https://www.rightmove.co.uk/properties/89770350",otm:"https://www.onthemarket.com/details/19731867/",zp:"",agent:"Stanbra Powell",dup:"Also on OnTheMarket (same £575k)"},
+ {id:"squirrel",addr:"Squirrel Close, Brackley",area:"other",loc:"NN13 · Brackley (10 mi from Bicester)",price:535000,disp:"£535,000",offer:508000,target:518000,match:6,
+  feats:{u:1,e:1,k:1,w:1,o:1,g:1},gnote:"Study + garage",
+  desc:"Superb open-plan kitchen/diner + family area lit by skylights and French doors to the garden. Utility, study, four beds, master ensuite, garage. Well-presented modern family home on a desirable close.",
+  why:"Listed late Feb, <b>reduced 12 Jun</b> — nearly 5 months on market signals price resistance. NN13 detached median £385k (upper quartile £545k). Open at £508k; vendor who has already cut once will likely engage around £515–520k.",
+  fresh:"Reduced 12 Jun · 5 mo on mkt",img:"https://media.rightmove.co.uk/property-photo/5b62e6e4d/172662287/5b62e6e4d0d1c9200ed6ab45cc51284c.jpeg",
+  fp:"https://media.rightmove.co.uk/dir/property-floorplan/d7052e7bf/172662287/d7052e7bf62cf82269b1366e01f894ed.png",
+  rm:"https://www.rightmove.co.uk/properties/172662287",otm:"",zp:"",agent:"(see Rightmove)",dup:"Rightmove only — no competing portal exposure (works in your favour)"},
+ {id:"churchleys",addr:"Church Leys Field, Ambrosden",area:"bicester",loc:"OX25 · 2 mi from Bicester",price:600000,disp:"£600,000",offer:580000,target:592000,match:6,
+  feats:{u:1,e:1,k:1,w:1,o:1,g:1},gnote:"Study + garage · TWO ensuites",
+  desc:"Double-fronted, 1,666 sq ft, very well presented. Full-length dual-aspect kitchen/dining room with utility off it, study, sitting room with French doors, cloakroom. Principal bedroom AND guest bedroom both ensuite. Open outlook towards Brill.",
+  why:"Fresh listing (9 Jul) at the top of your budget in the priciest district here (OX25 detached median £562k) — so discount room is modest but real. Two ensuites + 1,666 sq ft is strong value at £360/sq ft. <b>Open £580k</b>; anything ≤£592k is fair.",
+  fresh:"Added 9 Jul",img:"https://media.rightmove.co.uk/property-photo/48fecb5f0/90687027/48fecb5f0228fc9cb9db797df64c60a8.jpeg",
+  fp:"https://media.rightmove.co.uk/dir/property-floorplan/1194a85f8/90687027/1194a85f88a4debbdebc3bddc8cd425d.jpeg",
+  rm:"https://www.rightmove.co.uk/properties/90687027",otm:"https://www.onthemarket.com/details/19898940/",zp:"https://www.zoopla.co.uk/for-sale/details/73671631/",agent:"Thomas Merrifield",dup:"On all 3 portals (same £600k)"},
+ {id:"stopford",addr:"Stopford Place, Chipping Norton",area:"other",loc:"OX7 · Cotswold Gate, ~13 mi from Deddington",price:600000,disp:"£600,000",offer:585000,target:595000,match:6,
+  feats:{u:1,e:1,k:1,w:1,o:1,g:1},gnote:"Study + garage",
+  desc:"Cotswold-stone home on the edge of the Cotswold Gate development, overlooking open fields. Hall with cloakroom, study, 17'10 sitting room, spacious kitchen/dining room, utility, garage, landscaped garden, master ensuite.",
+  why:"Listed <b>yesterday</b> — vendors rarely accept big discounts in week one, and OX7 detached median is £570k, supporting the price. If you love it, open £585k to signal seriousness; otherwise watch it for 4–6 weeks.",
+  fresh:"Added 17 Jul (new)",img:"https://media.rightmove.co.uk/property-photo/f9256bbc8/91039167/f9256bbc8ff50f65a8ad72ea79f1deee.jpeg",
+  fp:"https://media.rightmove.co.uk/dir/property-floorplan/9a021eb91/91039167/9a021eb919a686b1d378ee1a21169b8e.jpeg",
+  rm:"https://www.rightmove.co.uk/properties/91039167",otm:"https://www.onthemarket.com/details/19946149/",zp:"",agent:"Maxwell Douglas",dup:"Also on OnTheMarket (same £600k)"},
+ {id:"gascoigne",addr:"Gascoigne Way, Bloxham",area:"banbury",loc:"OX15 · 4 mi from Deddington",price:595000,disp:"£595,000",offer:565000,target:577000,match:5,
+  feats:{u:1,e:1,k:0,w:1,o:2,g:1},gnote:"★ Double garage PART-CONVERTED to a study — your exact garage-office ask",
+  desc:"Considerably upgraded detached house on a generous south-facing plot at the edge of the village. Cloakroom, living room, separate dining room, kitchen + utility, master ensuite, parking for four. Double garage partly converted into a study.",
+  why:"<b>Reduced 19 May</b> and ~3 months on market. OX15 detached median £460k, upper quartile £550k — asking is ambitious for a non-open-plan layout. Open £565k; the conversion work is already done, which saves you ~£15–20k. Note: kitchen and dining are separate rooms (could be knocked through).",
+  fresh:"Reduced 19 May · 3 mo",img:"https://media.rightmove.co.uk/property-photo/37413d8fe/174904775/37413d8fef26fbf58e42cc8b8389e52e.jpeg",
+  fp:"https://media.rightmove.co.uk/dir/property-floorplan/c5bfdf0e3/174904775/c5bfdf0e385f029c53ff30f4f7cb5fd0.jpeg",
+  rm:"https://www.rightmove.co.uk/properties/174904775",otm:"https://www.onthemarket.com/details/14699264/",zp:"",agent:"Stanbra Powell",dup:"Also on OnTheMarket (same £595k)"},
+ {id:"skylark",addr:"Skylark Road, Bodicote",area:"banbury",loc:"OX15 · Longford Park, 4 mi from Deddington",price:535000,disp:"£535,000 (offers over)",offer:512000,target:525000,match:5,
+  feats:{u:0,e:1,k:1,w:1,o:1,g:1},gnote:"Dedicated home office + garage · utility not listed — confirm at viewing",
+  desc:"Extended, 1,632 sq ft, finished to an outstanding standard. Sitting room with log burner, dedicated home office, kitchen-diner, cloakroom, four beds, master ensuite, garage. Longford Park Phase One, Bodicote.",
+  why:"<b>Reduced 1 May</b>, ~3.5 months on market despite lovely presentation. OX15 median £460k. The extension supports value but the market has already pushed back once — open £512k, target ~£520–525k.",
+  fresh:"Reduced 1 May · 3.5 mo",img:"https://media.rightmove.co.uk/property-photo/05d514a07/174023114/05d514a074da5c642ceb876f1303ea5f.jpeg",
+  fp:"https://media.rightmove.co.uk/dir/property-floorplan/01647e91d/174023114/01647e91d8daf52cb91d714404b22239.jpeg",
+  rm:"https://www.rightmove.co.uk/properties/174023114",otm:"https://www.onthemarket.com/details/19170309/",zp:"https://www.zoopla.co.uk/for-sale/details/72830845/",agent:"Hortons",dup:"On all 3 portals (same £535k)"},
+ {id:"hawksmead",addr:"Hawksmead, Old Langford, Bicester",area:"bicester",loc:"OX26 · Bicester's most-loved family pocket",price:500000,disp:"£500,000 (offers over)",offer:495000,target:505000,match:5,
+  feats:{u:1,e:1,k:1,w:1,o:0,g:1},gnote:"Garage present — convertible to office (no existing office)",
+  desc:"Much-improved home of 1,152 sq ft in the ever-popular Old Langford area, short walk to Langford Primary, town and Bicester Village. Utility, kitchen/diner, cloakroom, master ensuite, garage. Sellers praise the community feel.",
+  why:"Fresh (8 Jul), 'offers over' pricing and a genuinely sought-after micro-area — don't lowball. It's the smallest home on the list (1,152 sq ft), which caps value. Open £495k; be ready to go to ~£505k if there's competition. OX26 upper-quartile detached: £520k.",
+  fresh:"Added 8 Jul",img:"https://media.rightmove.co.uk/property-photo/9e493795c/90642198/9e493795ca85d4e9e9128a389616872b.jpeg",
+  fp:"https://media.rightmove.co.uk/dir/property-floorplan/6ce56e223/90642198/6ce56e223242394e5d7a659bb236019e.jpeg",
+  rm:"https://www.rightmove.co.uk/properties/90642198",otm:"",zp:"https://www.zoopla.co.uk/for-sale/details/73662873/",agent:"(see Rightmove)",dup:"Also on Zoopla (same £500k offers over)"},
+ {id:"jones",addr:"Jones Close, Brackley",area:"other",loc:"NN13 · Brackley",price:600000,disp:"£600,000 (offers over)",offer:575000,target:588000,match:5,
+  feats:{u:1,e:1,k:0,w:1,o:2,g:1},gnote:"★ TWO insulated garden offices already built + garage",
+  desc:"1,937 sq ft — the largest home on this list. Large living room, separate dining room, modern kitchen, utility, master ensuite, big private rear garden, countryside views to the front, and an exceptional work-from-home setup with two insulated garden offices.",
+  why:"On since 28 May and <b>reduced two days ago</b> — the vendor is actively chasing the market right now, the best moment to bid. NN13 median £385k but this is top-band stock. Open £575k; £585–590k lands you 1,937 sq ft + ready-made offices. Kitchen isn't open-plan (dining separate).",
+  fresh:"Reduced 16 Jul",img:"https://media.rightmove.co.uk/property-photo/7bf06b434/89007657/7bf06b434ff433f81669ed1c1baf16db.jpeg",
+  fp:"https://media.rightmove.co.uk/dir/property-floorplan/f8c22c2f5/89007657/f8c22c2f509efe5967b036bf9d8ad3a5.png",
+  rm:"https://www.rightmove.co.uk/properties/89007657",otm:"",zp:"",agent:"Boughtons",dup:"Rightmove only"},
+ {id:"plumpton",addr:"Plumpton Road, Kingsmere, Bicester",area:"bicester",loc:"OX26 · Kingsmere development",price:475000,disp:"£475,000",offer:450000,target:462000,match:5,
+  feats:{u:1,e:1,k:1,w:1,o:0,g:1},gnote:"Garage present — convertible (no existing office)",
+  desc:"Four-bed detached on Kingsmere with kitchen/diner, downstairs WC, utility, master ensuite and garage. No onward chain (option to retain sitting tenant). Local pub, shops and community centre on the development.",
+  why:"Listed since early Feb — <b>5½ months unsold</b> on a development with steady supply of similar homes, and no chain pressure on the vendor's side to hold price. OX26 median £430k. Open £450k; ~£460k should secure it. Cheapest full-size option on the list.",
+  fresh:"Listed Feb · 5.5 mo",img:"https://media.rightmove.co.uk/property-photo/bf8122617/90404382/bf8122617af2e62e34d826471daeabe5.jpeg",
+  fp:"https://media.rightmove.co.uk/dir/property-floorplan/f66830eaf/90404382/f66830eaf7d9affacbdd7c9765993e23.png",
+  rm:"https://www.rightmove.co.uk/properties/90404382",otm:"https://www.onthemarket.com/details/19846833/",zp:"",agent:"Chancellors",dup:"Also on OnTheMarket (same £475k)"},
+ {id:"trenchard",addr:"Trenchard Circle, Heyford Park (new build 'Ingleby')",area:"bicester",loc:"OX25 · Upper Heyford, 6 mi from Bicester",price:482000,disp:"£482,000",offer:460000,target:470000,match:4,
+  feats:{u:2,e:1,k:1,w:1,o:0,g:0},gnote:"Utility cupboard only · no garage — weakest fit, but cheapest",
+  desc:"Brand-new David Wilson home at Heyford Springs. Open-plan kitchen/dining with French doors to a west-facing garden, utility cupboard, lounge, cloakroom, master ensuite. Growing village community between Bicester and Deddington.",
+  why:"New-build: negotiate <b>incentives, not just price</b>. An identical Ingleby plot is advertised at £480k on OnTheMarket, so £482k already has give. Push for £460–465k OR stamp-duty paid + flooring/turf package. Two bedrooms are singles and there's no garage — check fit before offering.",
+  fresh:"Added 13 Jul",img:"https://media.rightmove.co.uk/property-photo/664bc09e8/90835230/664bc09e86a67c6aa04d14d8e3eb94c6.jpeg",
+  fp:"https://media.rightmove.co.uk/dir/property-floorplan/2e143b9ee/90835230/2e143b9ee28a1ad30ccdd03809ba369d.png",
+  rm:"https://www.rightmove.co.uk/properties/90835230",otm:"https://www.onthemarket.com/details/19930703/",zp:"",agent:"David Wilson Homes",dup:"Also on OnTheMarket (£482k; identical plot at £480k)"}
+];
+const FEAT=[["u","Utility"],["e","Ensuite master"],["k","Open-plan kit/diner"],["w","WC every floor"],["o","Office / converted gge"],["g","Garage"]];
+const grid=document.getElementById('grid');
+let filter='all',sort='match';
+function money(n){return '£'+n.toLocaleString('en-GB')}
+function render(){
+  let list=P.filter(p=>filter==='all'||(filter==='full'?p.match===6:p.area===filter));
+  list=[...list].sort((a,b)=>sort==='match'?(b.match-a.match||a.price-b.price):sort==='priceA'?a.price-b.price:sort==='priceD'?b.price-a.price:( (b.price-b.offer)/b.price-(a.price-a.offer)/a.price ));
+  grid.innerHTML=list.map(p=>{
+    const feats=FEAT.map(([k,lab])=>{const v=p.feats[k];return `<span class="f ${v===0?'no':v===2?'part':''}">${v===0?'✗ ':v===2?'~ ':'✓ '}${lab}</span>`}).join('');
+    const links=[`<a class="rm" href="${p.rm}" target="_blank">Rightmove ↗</a>`,
+      p.zp?`<a href="${p.zp}" target="_blank">Zoopla ↗</a>`:'',
+      p.otm?`<a href="${p.otm}" target="_blank">OnTheMarket ↗</a>`:'',
+      `<a href="${p.fp}" target="_blank">Floorplan ↗</a>`,
+      `<a href="${p.rm}#/media" target="_blank">All photos ↗</a>`].join('');
+    return `<div class="card">
+      <div class="imgwrap"><img loading="lazy" src="${p.img}" alt="${p.addr}">
+        <span class="match ${p.match===6?'':'partial'}">${p.match}/6 match</span>
+        <span class="fresh">${p.fresh}</span></div>
+      <div class="body">
+        <div><div class="addr">${p.addr}</div><div class="area">${p.loc} · ${p.agent}</div></div>
+        <div class="prices">
+          <div class="pbox"><div class="l">Advertised</div><div class="v">${p.disp}</div></div>
+          <div class="pbox offer"><div class="l">Rec. opening offer</div><div class="v">${money(p.offer)}</div>
+          <div class="saving">target ≤ ${money(p.target)} (${(100*(p.price-p.offer)/p.price).toFixed(1)}% below asking)</div></div>
+        </div>
+        <div class="feats">${feats}</div>
+        <div class="desc">${p.desc}<br><b style="font-size:12px">${p.gnote}</b></div>
+        <div class="why">💡 ${p.why}</div>
+        <div class="dup">🔁 ${p.dup}</div>
+        <div class="links">${links}</div>
+      </div></div>`}).join('');
+}
+document.querySelectorAll('.bar button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.bar button').forEach(x=>x.classList.remove('on'));b.classList.add('on');filter=b.dataset.f;render()});
+document.getElementById('sort').onchange=e=>{sort=e.target.value;render()};
+render();
+</script>
+</body>
+</html>
