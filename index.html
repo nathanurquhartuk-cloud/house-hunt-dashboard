@@ -1,243 +1,314 @@
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>House Hunt Dashboard — 3–4 Bed Detached ≤ £700k</title>
 <style>
-  :root{--bg:#f4f5f7;--card:#ffffff;--ink:#1a2233;--muted:#68738a;--accent:#0e6e5c;--accent2:#0a5446;--gold:#b98a1e;--red:#b0433a;--chipok:#e2f3ec;--chipokink:#116149;--chippart:#fdf3dd;--chippartink:#8a6410;--chipno:#f6e7e5;--chipnoink:#93453e;--line:#e3e6ec;}
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
-  header{background:linear-gradient(135deg,#0d3b33,#0e6e5c);color:#fff;padding:28px 22px 22px}
-  header h1{font-size:1.5rem;margin-bottom:6px}
-  header .sub{opacity:.85;font-size:.9rem;max-width:900px}
-  .criteria{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-  .criteria span{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);padding:4px 10px;border-radius:99px;font-size:.78rem}
-  .stats{display:flex;flex-wrap:wrap;gap:22px;margin-top:16px}
-  .stats div{font-size:.8rem;opacity:.9}
-  .stats b{display:block;font-size:1.25rem;font-weight:700}
-  .controls{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line);padding:10px 22px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-  .fbtn{border:1px solid var(--line);background:#fff;color:var(--ink);padding:6px 13px;border-radius:99px;font-size:.82rem;cursor:pointer}
-  .fbtn.active{background:var(--accent);border-color:var(--accent);color:#fff}
-  .controls select{margin-left:auto;border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:.82rem;background:#fff;color:var(--ink)}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px;padding:22px;max-width:1500px;margin:0 auto}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 3px rgba(20,30,50,.06)}
-  .photo{position:relative;height:210px;background:#dde1e8}
-  .photo img{width:100%;height:100%;object-fit:cover;display:block}
-  .badge{position:absolute;top:10px;left:10px;background:#0d3b33;color:#fff;font-weight:700;font-size:.8rem;padding:4px 10px;border-radius:8px}
-  .badge.s6{background:#0e6e5c}.badge.s5{background:#3b7a3f}.badge.s4{background:#8a6410}.badge.s3{background:#7c5a2e}
-  .fresh{position:absolute;top:10px;right:10px;font-size:.72rem;font-weight:600;padding:4px 9px;border-radius:8px;background:rgba(255,255,255,.92);color:var(--ink)}
-  .fresh.new{background:#ffd75e;color:#4a3800}
-  .body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
-  .addr{font-weight:700;font-size:1.02rem}
-  .meta{font-size:.78rem;color:var(--muted)}
-  .prices{display:flex;gap:18px;background:#f2f6f4;border:1px solid #dcE8e2;border-radius:10px;padding:9px 13px}
-  .prices div{font-size:.72rem;color:var(--muted)}
-  .prices b{display:block;font-size:1.05rem;color:var(--ink)}
-  .prices .rec b{color:var(--accent2)}
-  .chips{display:flex;flex-wrap:wrap;gap:5px}
-  .chip{font-size:.72rem;padding:3px 9px;border-radius:99px;font-weight:600}
-  .chip.y{background:var(--chipok);color:var(--chipokink)}
-  .chip.p{background:var(--chippart);color:var(--chippartink)}
-  .chip.n{background:var(--chipno);color:var(--chipnoink)}
-  .desc{font-size:.82rem;color:#3c4558}
-  .rationale{font-size:.8rem;background:#fbf7ec;border-left:3px solid var(--gold);padding:8px 11px;border-radius:0 8px 8px 0;color:#54431c}
-  .links{margin-top:auto;display:flex;flex-wrap:wrap;gap:7px;padding-top:4px}
-  .links a{font-size:.76rem;font-weight:600;text-decoration:none;color:var(--accent2);border:1px solid #cfe0da;background:#f2f8f6;padding:5px 11px;border-radius:8px}
-  .links a:hover{background:var(--accent);color:#fff}
-  footer{max-width:1500px;margin:0 auto;padding:10px 22px 42px;font-size:.76rem;color:var(--muted)}
-  footer h3{font-size:.85rem;color:var(--ink);margin:14px 0 6px}
-  .disclaimer{margin-top:12px;padding:10px 13px;background:#f6e7e5;border-radius:8px;color:#93453e;font-weight:600}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#f4f6f8;color:#1b2430;line-height:1.55;padding:0 0 60px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header{background:linear-gradient(135deg,#1f3a5f,#2d5f8a);color:#fff;padding:32px 0 28px;margin-bottom:26px}
+header h1{font-size:30px;letter-spacing:-.5px;margin-bottom:8px}
+header .sub{font-size:14px;opacity:.9;max-width:900px}
+.crit{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.crit span{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);border-radius:20px;padding:5px 13px;font-size:12.5px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:22px}
+.stat{background:#fff;border:1px solid #e2e7ec;border-radius:10px;padding:14px 16px}
+.stat b{display:block;font-size:23px;color:#1f3a5f;letter-spacing:-.5px}
+.stat span{font-size:12px;color:#66727f;text-transform:uppercase;letter-spacing:.4px}
+.controls{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;background:#fff;border:1px solid #e2e7ec;border-radius:10px;padding:14px 16px;margin-bottom:22px}
+.filters{display:flex;flex-wrap:wrap;gap:7px}
+.filters button{border:1px solid #d3dae1;background:#fff;color:#3d4a58;border-radius:18px;padding:6px 14px;font-size:13px;cursor:pointer;transition:.15s}
+.filters button:hover{border-color:#2d5f8a}
+.filters button.on{background:#1f3a5f;border-color:#1f3a5f;color:#fff}
+.sortbox{font-size:13px;color:#66727f;display:flex;align-items:center;gap:8px}
+select{border:1px solid #d3dae1;border-radius:8px;padding:7px 10px;font-size:13px;background:#fff;color:#1b2430}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}
+.card{background:#fff;border:1px solid #e2e7ec;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 3px rgba(20,30,45,.05)}
+.photo{position:relative;height:190px;background:#dfe4e9}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.badge{position:absolute;top:10px;left:10px;background:#1f3a5f;color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:14px}
+.badge.g6{background:#1a7f4b}
+.badge.g5{background:#2d5f8a}
+.badge.g4{background:#4a7ba7}
+.badge.g3{background:#6b7d8f}
+.fresh{position:absolute;top:10px;right:10px;background:rgba(255,255,255,.95);color:#1b2430;font-size:11px;font-weight:600;padding:4px 9px;border-radius:12px;border:1px solid #d3dae1}
+.fresh.new{background:#e8f6ee;color:#146c40;border-color:#a8dcc0}
+.fresh.red{background:#fdeeea;color:#a53c1c;border-color:#f2c3b6}
+.body{padding:15px 16px 17px;display:flex;flex-direction:column;gap:11px;flex:1}
+.addr{font-size:16.5px;font-weight:700;letter-spacing:-.2px}
+.meta{font-size:12.5px;color:#66727f}
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;background:#f7f9fb;border:1px solid #e6ebef;border-radius:9px;padding:10px}
+.prices div{text-align:center}
+.prices span{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;color:#7b8794;margin-bottom:2px}
+.prices b{font-size:15px;letter-spacing:-.3px}
+.p-adv b{color:#3d4a58}
+.p-open b{color:#1a7f4b}
+.p-ceil b{color:#a5670f}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:11.5px;padding:3px 9px;border-radius:12px;border:1px solid}
+.chip.y{background:#eaf6ef;color:#146c40;border-color:#bfe3ce}
+.chip.p{background:#fef6e6;color:#8a6212;border-color:#f0dcae}
+.chip.n{background:#f4f5f6;color:#8b949e;border-color:#e0e4e8}
+.desc{font-size:13px;color:#48545f}
+.why{font-size:13px;background:#f7f9fb;border-left:3px solid #2d5f8a;padding:9px 11px;border-radius:0 7px 7px 0;color:#3d4a58}
+.why b{color:#1f3a5f}
+.links{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;padding-top:4px}
+.links a{font-size:12px;text-decoration:none;border:1px solid #d3dae1;border-radius:7px;padding:5px 10px;color:#2d5f8a;background:#fff}
+.links a:hover{border-color:#2d5f8a;background:#f4f8fb}
+footer{margin-top:34px;font-size:12.5px;color:#66727f;background:#fff;border:1px solid #e2e7ec;border-radius:10px;padding:18px 20px}
+footer h3{font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:#3d4a58;margin-bottom:8px}
+footer p{margin-bottom:9px}
+.warn{background:#fdf6e7;border:1px solid #f0dcae;color:#7a5a12;border-radius:8px;padding:11px 13px;margin-top:12px;font-size:12.5px}
+.none{grid-column:1/-1;text-align:center;color:#7b8794;padding:40px;background:#fff;border:1px dashed #d3dae1;border-radius:10px}
+@media(max-width:600px){header h1{font-size:23px}.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <header>
+ <div class="wrap">
   <h1>🏡 House Hunt Dashboard</h1>
-  <div class="sub">3–4 bedroom <b>detached</b> houses ≤ £700,000 · Bicester · Brackley · Deddington · Chesterton (Oxon) · Chipping Norton · Steeple Aston · Oxford (1-mile radius each, Ambrosden excluded) · Refreshed <b>28 August 2026</b></div>
-  <div class="criteria">
-    <span>Utility room</span><span>Master ensuite</span><span>Open-plan kitchen/diner</span><span>WC on every floor</span><span>Office / convertible garage</span><span>Garage</span>
+  <div class="sub">3–4 bedroom detached houses ≤ £700,000 · Bicester · Brackley · Deddington · Chesterton (Oxon) · Chipping Norton · Steeple Aston · Oxford (1-mile radius each, Ambrosden excluded) · <b>Refreshed 4 September 2026</b></div>
+  <div class="crit">
+   <span>Utility room</span><span>Master ensuite</span><span>Open-plan kitchen/diner</span><span>WC on every floor</span><span>Office / convertible garage</span><span>Garage</span>
   </div>
-  <div class="stats">
-    <div><b>218</b>listings screened</div>
-    <div><b>14</b>shortlisted</div>
-    <div><b>3</b>full 6/6 matches</div>
-    <div><b>2</b>new this week</div>
-    <div><b>£375k–£675k</b>shortlist range</div>
+  <div class="sub" style="margin-top:12px;font-size:12.5px">Match badges count only <b>confirmed</b> criteria. A "+2~" suffix means two more are partial or convertible — hover any amber chip to see why.
   </div>
+ </div>
 </header>
 
-<div class="controls" id="filters">
-  <button class="fbtn active" data-area="all">All areas</button>
-  <button class="fbtn" data-area="Bicester">Bicester &amp; villages</button>
-  <button class="fbtn" data-area="Chesterton">Chesterton</button>
-  <button class="fbtn" data-area="Brackley">Brackley</button>
-  <button class="fbtn" data-area="Chipping Norton">Chipping Norton</button>
-  <button class="fbtn" data-area="Abingdon">Abingdon/Oxford</button>
-  <select id="sort">
-    <option value="score">Sort: best match</option>
-    <option value="priceAsc">Price: low → high</option>
-    <option value="priceDesc">Price: high → low</option>
-    <option value="fresh">Newest first</option>
-    <option value="room">Biggest negotiation room</option>
-  </select>
+<div class="wrap">
+ <div class="stats">
+  <div class="stat"><b>222</b><span>listings screened</span></div>
+  <div class="stat"><b>15</b><span>shortlisted</span></div>
+  <div class="stat"><b>4</b><span>full 6/6 matches</span></div>
+  <div class="stat"><b>11</b><span>new to shortlist</span></div>
+  <div class="stat"><b>£490k–£700k</b><span>shortlist range</span></div>
+  <div class="stat"><b>0</b><span>gone under offer</span></div>
+ </div>
+
+ <div class="controls">
+  <div class="filters" id="filters">
+   <button class="on" data-a="all">All areas</button>
+   <button data-a="bicester">Bicester &amp; villages</button>
+   <button data-a="brackley">Brackley</button>
+   <button data-a="chipnorton">Chipping Norton</button>
+   <button data-a="oxford">Oxford</button>
+  </div>
+  <div class="sortbox"><label for="sort">Sort:</label>
+   <select id="sort">
+    <option value="match">Best match</option>
+    <option value="plow">Price: low → high</option>
+    <option value="phigh">Price: high → low</option>
+    <option value="new">Newest first</option>
+    <option value="nego">Biggest negotiation room</option>
+   </select>
+  </div>
+ </div>
+
+ <div class="grid" id="grid"></div>
+
+ <footer>
+  <h3>Method &amp; sources</h3>
+  <p>Searches run live on Rightmove on 4 September 2026 for each of the seven areas (1.0-mile radius, detached only, 3–4 beds, max £700,000), de-duplicated by listing ID, with every Ambrosden address removed. Each of the 222 unique homes was scored out of 6 against the must-have list using its full listing text and key features: <b>✓</b> confirmed · <b>~</b> partial or convertible · <b>✗</b> not evidenced. The Chesterton search was pinned to <i>Chesterton, Bicester, Oxfordshire</i> after the plain "Chesterton" slug was found to resolve to Chesterton, Newcastle-under-Lyme, Staffordshire.</p>
+  <p>Recommended offers are derived from Rightmove sold-price records for each outcode (detached, last 2 years): <b>OX26</b> median £425k (IQR £330k–£510k, n=147) · <b>NN13</b> median £400k (£350k–£550k, n=147) · <b>OX7</b> median £555k (£400k–£680k, n=138) · <b>OX2</b> median £633k (£423k–£929k, n=120) · <b>OX1</b> median £521k (£395k–£735k, n=114) · <b>OX25</b> median £530k (£440k–£673k, n=135) — then adjusted for floor area, specification, weeks on market, prior reductions, chain-free status and new-build incentives.</p>
+  <p>Cross-portal links found by street-name match against OnTheMarket and Zoopla. All 14 homes on last week's shortlist were re-checked against a Sold-STC-inclusive search: every one is still available and none has changed price.</p>
+  <div class="warn">⚠️ <b>This is research, not valuation advice.</b> Prices were read live on 4 September 2026 and may have changed since. Always verify with viewings, a surveyor and your own solicitor before making an offer.</div>
+ </footer>
 </div>
-
-<div class="grid" id="grid"></div>
-
-<footer>
-  <h3>Methodology</h3>
-  <p>Listings collected live from Rightmove on 28 Aug 2026 across seven 1-mile-radius searches (218 unique detached 3–4 bed homes ≤ £700k after removing Ambrosden and cross-search duplicates; "Chesterton" verified as Chesterton, Bicester, Oxfordshire). Each home is scored /6 against the flexible must-haves using full listing descriptions and key features: ✓ confirmed · ~ partial/convertible · ✗ not evidenced. Recommended offers are derived from Rightmove sold-price records for each outcode (last 2 years, detached): OX26 median £422k (IQR £296k–£510k, n=150) · NN13 median £400k (£350k–£550k, n=147) · OX7 median £550k (£400k–£680k, n=138) · OX14 median £443k (£295k–£550k, n=141) — adjusted for size, spec, time on market, price reductions, chain-free status and new-build incentives. Cross-portal links found by street-name match on OnTheMarket and Zoopla.</p>
-  <div class="disclaimer">⚠️ This is research, not valuation advice. Prices read live on 28 Aug 2026 and may have changed. Always verify with viewings, a surveyor and your own solicitor before offering.</div>
-</footer>
 
 <script>
 const P=[
-{id:90642198,addr:"Hawksmead, Old Langford, Bicester",area:"Bicester",price:490000,beds:4,score:5,first:"2026-07-08",freshTag:"Reduced yesterday",fresh:2,
- c:{u:2,e:2,o:2,w:2,f:1,g:2},open:462000,ceil:480000,
- desc:"Four-bed detached on a cul-de-sac in sought-after Old Langford. Kitchen/diner with utility area across the rear, conservatory, wider-than-average SW-facing garden, downstairs WC, garage, EV charger. Walk to Langford Primary, surgery and shops.",
- why:"Reduced yesterday after ~7 weeks on market — a clear signal of motivation. £490k sits between the OX26 detached median (£422k) and upper quartile (£510k); open at £462k and be ready to settle around £480k. Garage offers office-conversion potential.",
- photo:"https://media.rightmove.co.uk/property-photo/9e493795c/90642198/9e493795ca85d4e9e9128a389616872b.jpeg",
- fp:"https://media.rightmove.co.uk/dir/property-floorplan/6ce56e223/90642198/6ce56e223242394e5d7a659bb236019e.jpeg",
- links:{rm:90642198,z:"73662873"}},
-{id:92166438,addr:"Bronnley Way, Brackley NN13",area:"Brackley",price:535000,beds:4,score:6,first:"2026-08-19",freshTag:"Added 19 Aug",fresh:1,
- c:{u:2,e:2,o:2,w:2,f:2,g:2},open:515000,ceil:530000,
- desc:"Full-house match: 4 double bedrooms, master ensuite, 4-piece family bathroom, cloakroom, kitchen/breakfast room with island plus separate utility, study, southerly-facing garden, garage with parking. Finished to a high standard throughout.",
- why:"The only 6/6 under £550k. Fresh listing (9 days) in a popular spot, so negotiation room is modest — but £535k is close to the NN13 upper quartile (£550k), leaving little downside. Open at £515k, ceiling £530k; move quickly, this ticks every box.",
- photo:"https://media.rightmove.co.uk/property-photo/60894e7c2/92166438/60894e7c25919af08f037991dda1e5f7.jpeg",
- fp:"https://media.rightmove.co.uk/dir/property-floorplan/9357b382f/92166438/9357b382fa1d6e6a13c311595145e7db.jpeg",
- links:{rm:92166438,otm:"17828725",z:"71285145"}},
-{id:92448090,addr:"Morris Close, Chipping Norton",area:"Chipping Norton",price:615000,beds:4,score:6,first:"2026-08-27",freshTag:"NEW — added yesterday",fresh:1,
- c:{u:2,e:2,o:2,w:2,f:2,g:2},open:590000,ceil:610000,
- desc:"Modern four-bed with stylish gloss kitchen/diner, separate utility, study and cloakroom, sitting room with French doors to the garden, principal ensuite, countryside views, garage and parking for four cars.",
- why:"Brand-new 6/6 listing — expect competition. £615k is comfortably inside the OX7 detached range (median £550k, Q3 £680k) for a modern spec with views. Open at £590k to test the water, but its freshness means £605–610k is the realistic landing zone.",
+{id:90406419,area:"oxford",addr:"Stone Close, Oxford OX2",beds:4,size:"1,260 sq ft",agent:"Chancellors, Botley",since:"2026-08-20",listed:"Added 20 Aug",fresh:"",score:4,part:2,adv:550000,open:525000,ceil:545000,
+ photo:"https://media.rightmove.co.uk/property-photo/0c4f70d49/90406419/0c4f70d4984f29397cee3db48830baba.jpeg",
+ fp:"https://media.rightmove.co.uk/dir/property-floorplan/84f00669f/90406419/84f00669f45e6d344a3d46179a35d172.png",
+ c:{u:"y",e:"y",o:"p",w:"y",s:"p",g:"y"},
+ cn:{o:"Kitchen/dining room, not knocked through",s:"Integral garage explicitly flagged as convertible to a study"},
+ desc:"Well-presented modern detached home over two floors: bay-fronted reception with feature fireplace, conservatory onto a west-facing garden, fitted kitchen/dining room, utility, separate cloakroom and integral garage. Principal bedroom with built-in wardrobes and ensuite shower room, plus two further doubles and a single.",
+ why:"Priced <b>£83k below the OX2 detached median</b> of £633k, which is unusual for this postcode. Only two weeks on the market so the vendor has little pressure yet. The unconverted garage and a dated conservatory are the fair grounds for opening below asking.",
+ otm:"https://www.onthemarket.com/details/17686018/",zoo:"https://www.zoopla.co.uk/for-sale/details/73606329/"},
+
+{id:91138905,area:"brackley",addr:"Oberon Lane, Brackley NN13",beds:4,size:"1,539 sq ft",agent:"Boughtons, Brackley",since:"2026-07-21",listed:"Added 21 Jul",fresh:"",score:6,part:0,adv:550000,open:520000,ceil:540000,
+ photo:"https://media.rightmove.co.uk/property-photo/8b77ee94b/91138905/8b77ee94b4deafae8de505697174ecb8.jpeg",
+ fp:"https://media.rightmove.co.uk/dir/property-floorplan/fcede79c8/91138905/fcede79c85d3e525ebd349f016ecb8f5.png",
+ c:{u:"y",e:"y",o:"y",w:"y",s:"y",g:"y"},cn:{},
+ desc:"David Wilson Homes build from 2017, owned from new and immaculate. Ground-floor study, separate living room, and an open-plan kitchen/dining room with upgraded Italian stone sink, six-burner gas hob and integrated appliances. Separate utility, downstairs cloakroom, principal bedroom with fitted wardrobes and ensuite. Landscaped south-east garden, powered garage, EV charger. EPC B.",
+ why:"Hits all six criteria with a genuine ground-floor study — the cleanest match on the list. But £550k sits <b>right at NN13's top quartile</b> (£550k), and six-and-a-half weeks without a reduction suggests the market is resisting that level. Open near 5.5% below.",
+ otm:"",zoo:""},
+
+{id:92427786,area:"brackley",addr:"Juliet Drive, Brackley NN13",beds:4,size:"1,353 sq ft",agent:"Boughtons, Brackley",since:"2026-08-26",listed:"Added 26 Aug",fresh:"new",score:6,part:0,adv:550000,open:525000,ceil:542000,
+ photo:"https://media.rightmove.co.uk/property-photo/bc5466f11/92427786/bc5466f116e208c838f1e22b86f28957.jpeg",
+ fp:"https://media.rightmove.co.uk/dir/property-floorplan/086a0b319/92427786/086a0b3195cd03d65d92f43f30c75f67.png",
+ c:{u:"y",e:"y",o:"y",w:"y",s:"y",g:"y"},cn:{},
+ desc:"Cul-de-sac of just four homes. Spacious modern kitchen diner with breakfast bar, integrated appliances and raised double oven; light-filled living room; versatile third reception usable as snug or study. French and bi-folding doors to a landscaped garden with large patio. Principal bedroom with ensuite, separate utility and downstairs W.C. Garage and driveway. EPC B.",
+ why:"A six-out-of-six at the same £550k as Oberon Lane but <b>186 sq ft smaller</b>, and only ten days on the market so vendor expectations are still fresh. The four-home cul-de-sac setting is the premium you'd be paying for. Keep the ceiling tight.",
+ otm:"",zoo:""},
+
+{id:92536884,area:"bicester",addr:"Buxton Close, Kingsmere, Bicester OX26",beds:4,size:"1,500 sq ft",agent:"Barton Fleming, Bicester",since:"2026-08-29",listed:"Added 29 Aug",fresh:"new",score:4,part:2,adv:550000,open:528000,ceil:545000,
+ photo:"https://media.rightmove.co.uk/property-photo/2fa73788d/92536884/2fa73788d5935e1f4711ad2057c6eff7.jpeg",
+ fp:"https://media.rightmove.co.uk/dir/property-floorplan/b85bdf96c/92536884/b85bdf96c0478d0275bfcdeae7f9c082.jpeg",
+ c:{u:"y",e:"y",o:"p",w:"y",s:"p",g:"y"},
+ cn:{o:"18'9 x 12'3 kitchen diner, but separate from the living room",s:"Box room/study on the first floor rather than a full office",w:"Cloakroom on the ground, ensuite + bathroom on the first, shower room on the second — genuinely one per floor"},
+ desc:"Cala-built in 2022 and arranged over three storeys. Storm porch, entrance hall and cloakroom; bay-windowed living room 18'9 x 10'3; kitchen diner 18'9 x 12'3 with marble worktops and French doors to a west-facing garden; utility. First floor has two bedrooms plus box room/study, a spacious ensuite with bath and large shower, and the main bathroom. Second floor adds two doubles and a shower room. EPC B (85).",
+ why:"The <b>only shortlisted home with a WC on all three floors</b>, and a 2022 Cala build needing nothing done. £550k is well above OX26's £510k top quartile, but that reflects a near-new three-storey house. Six days listed means almost no leverage — open modestly and be ready to move to £545k.",
+ otm:"",zoo:""},
+
+{id:90406851,area:"oxford",addr:"Hanson Drive, Oxford OX2",beds:4,size:"1,236 sq ft",agent:"Chancellors, Botley",since:"2026-08-04",listed:"Reduced 4 Aug",fresh:"red",score:4,part:2,adv:575000,open:545000,ceil:565000,
+ photo:"https://media.rightmove.co.uk/property-photo/c978951e4/90406851/c978951e4bc64910f11cec228ad5dafc.jpeg",
+ fp:"https://media.rightmove.co.uk/dir/property-floorplan/aaa3e9aa1/90406851/aaa3e9aa120a0f79b7dad456d5970f32.png",
+ c:{u:"y",e:"y",o:"p",w:"y",s:"p",g:"y"},
+ cn:{o:"L-shaped fitted kitchen/dining room",s:"No dedicated study; garage is the conversion candidate"},
+ desc:"Modern four-bedroom detached with a south-west facing garden and no forward chain. Triple-aspect reception with French doors to the garden, L-shaped kitchen/dining room, utility with garden access, separate cloakroom with understairs storage. Principal double-aspect bedroom with built-in wardrobe and modern ensuite shower room, two further doubles, a single and a family bathroom. Garage and ample off-street parking.",
+ why:"Already <b>reduced once and still unsold a month later</b> — the clearest sign of movement among the OX2 pair. Chain-free, so you can trade speed of completion against price. Still £58k under the OX2 median even at asking.",
+ otm:"",zoo:"https://www.zoopla.co.uk/for-sale/details/73606362/"},
+
+{id:92448090,area:"chipnorton",addr:"Morris Close, Chipping Norton OX7",beds:4,size:"1,375 sq ft",agent:"Maxwell Douglas, Chipping Norton",since:"2026-08-27",listed:"Added 27 Aug",fresh:"new",score:6,part:0,adv:615000,open:588000,ceil:605000,
  photo:"https://media.rightmove.co.uk/property-photo/52c499464/92448090/52c499464b4083bed8a24f3a17a5f581.jpeg",
  fp:"https://media.rightmove.co.uk/dir/property-floorplan/bd25d5a90/92448090/bd25d5a90945da77247c6d606b00d39c.jpeg",
- links:{rm:92448090,otm:"20218197"}},
-{id:91039167,addr:"Stopford Place, Chipping Norton",area:"Chipping Norton",price:600000,beds:4,score:6,first:"2026-07-17",freshTag:"Added 17 Jul",fresh:2,
- c:{u:2,e:2,o:2,w:2,f:2,g:2},open:572000,ceil:590000,
- desc:"Cotswold-stone four-bed on the edge of the Cotswold Gate development, overlooking open fields. 21ft kitchen/dining room plus utility, separate study, cloakroom, principal ensuite, bay-window sitting room with garden doors, garage and block-paved drive.",
- why:"6/6 match at £15k less than Morris Close, and six weeks on the market without a reduction suggests the vendor may now engage. Sits between OX7 median (£550k) and Q3 (£680k). Open at £572k (-4.7%); £585–590k should secure it.",
- photo:"https://media.rightmove.co.uk/property-photo/f9256bbc8/91039167/f9256bbc8ff50f65a8ad72ea79f1deee.jpeg",
- fp:"https://media.rightmove.co.uk/dir/property-floorplan/9a021eb91/91039167/9a021eb919a686b1d378ee1a21169b8e.jpeg",
- links:{rm:91039167,otm:"19946149"}},
-{id:91977066,addr:"Beech Road, Launton (Bicester)",area:"Bicester",price:675000,beds:4,score:5,first:"2026-08-13",freshTag:"Added 13 Aug",fresh:1,
- c:{u:2,e:2,o:2,w:2,f:1,g:2},open:640000,ceil:662000,
- desc:"Four double bedrooms with TWO ensuites, kitchen diner plus separate utility, cloakroom, family room, galleried landing. Substantial wrap-around walled plot overlooking green space, double garage, driveway for four cars, in popular Launton village.",
- why:"£675k is well above the OX26 upper quartile (£510k), but the wrap-around plot, two ensuites and double garage (easy office conversion) justify a premium. Two weeks in without much interest priced this high gives leverage: open £640k, ceiling £662k.",
- photo:"https://media.rightmove.co.uk/property-photo/53af037da/91977066/53af037daf02bff33fe4c78d9d77782a.jpeg",
- fp:"https://media.rightmove.co.uk/dir/property-floorplan/de87ad91e/91977066/de87ad91e24156ea460680d0edcd577e.jpeg",
- links:{rm:91977066}},
-{id:91489383,addr:"Olive Mead, Bicester",area:"Bicester",price:550000,beds:4,score:5,first:"2026-07-31",freshTag:"Added 31 Jul",fresh:2,
- c:{u:2,e:2,o:2,w:2,f:1,g:2},open:525000,ceil:540000,
- desc:"Near-new four-bed with an exceptional EPC A (108) — solar panels and rainwater harvesting. Kitchen diner plus separate utility, cloakroom, ensuite, garage, side and rear gardens, block-paved driveway.",
- why:"EPC A means unusually low running costs — rare even among new builds. Four weeks on market at £40k above the OX26 Q3; the eco spec supports some premium but not all of it. Open £525k, ceiling £540k. Garage gives the office-conversion route.",
- photo:"https://media.rightmove.co.uk/property-photo/4ee78796b/91489383/4ee78796b9546cc9cd5cb8adf2e5d4ef.jpeg",
- fp:"https://media.rightmove.co.uk/dir/property-floorplan/1b74f9664/91489383/1b74f96644ffb3d61c3898029bb71233.jpeg",
- links:{rm:91489383}},
-{id:90567330,addr:"John Clare Close, Brackley",area:"Brackley",price:675000,beds:4,score:5,first:"2026-07-07",freshTag:"Added 7 Jul",fresh:2,
- c:{u:2,e:2,o:2,w:1,f:2,g:2},open:640000,ceil:660000,
- desc:"Expansive four-bed in a sought-after Brackley close: large kitchen/diner with island, utility, study, dual-aspect sitting room, master suite with dressing room and ensuite, private garden, large driveway and detached DOUBLE garage.",
- why:"Top-end Brackley (NN13 Q3 £550k) but the master suite, study and double garage earn it. Seven-plus weeks on market with no reduction suggests price testing; open at £640k (-5%) and expect to meet near £660k. Confirm the downstairs WC on viewing.",
- photo:"https://media.rightmove.co.uk/property-photo/d37fac467/90567330/d37fac4675b8bbfc7de8cc0ef09a6be2.jpeg",
- fp:"https://media.rightmove.co.uk/dir/property-floorplan/f43932942/90567330/f4393294231396af7afe17851f7c758d.jpeg",
- links:{rm:90567330,otm:"19877342",z:"73646660"}},
-{id:91131447,addr:"Woodland Close, Launton (Bicester)",area:"Bicester",price:625000,beds:4,score:4,first:"2026-07-21",freshTag:"Added 21 Jul",fresh:2,
- c:{u:2,e:2,o:1,w:2,f:2,g:1},open:595000,ceil:612000,
- desc:"Village cul-de-sac home backing onto Woodland Trust land. Kitchen breakfast-cum-diner with bi-folds, vaulted 13ft utility extension with skylights, cloakroom, ensuite — and the garage is ALREADY converted to a garden office and gym.",
- why:"The only home with a ready-made office conversion done — no project needed. Kitchen/diner is more 'broken-plan' than open-plan and the garage is gone (hence 4/6 + 2 partials). Five weeks on: open £595k, ceiling £612k against an OX26 Q3 of £510k plus village premium.",
+ c:{u:"y",e:"y",o:"y",w:"y",s:"y",g:"y"},cn:{},
+ desc:"Modern four-bedroom home with views over open countryside and walking access to town. Stylish kitchen/diner in contemporary gloss units opening to a useful utility room; spacious sitting room with French doors to the garden; separate study; ground-floor cloakroom. Four double bedrooms upstairs, principal with ensuite. Single garage and parking for four vehicles.",
+ why:"Clean six-out-of-six with a proper separate study and countryside views. £615k sits <b>between the OX7 median (£555k) and its top quartile (£680k)</b>, which is defensible for the spec. Just over a week on the market, so leverage is limited — open around 4.5% below and expect to land near £600k.",
+ otm:"https://www.onthemarket.com/details/20218197/",zoo:""},
+
+{id:166110257,area:"bicester",addr:"Southwell Road, Kingsmere, Bicester OX26",beds:4,size:"2,012 sq ft",agent:"Breckon &amp; Breckon, Bicester",since:"2026-07-16",listed:"Added 16 Jul",fresh:"",score:6,part:0,adv:615000,open:580000,ceil:600000,
+ photo:"https://media.rightmove.co.uk/property-photo/a66bf024b/166110257/a66bf024b378dce8fd5802b64f12c0e7.jpeg",
+ fp:"https://media.rightmove.co.uk/dir/property-floorplan/b05aee1bc/166110257/b05aee1bc8695c5a7971bab2e4055762.png",
+ c:{u:"y",e:"y",o:"y",w:"y",s:"y",g:"y"},
+ cn:{g:"Double garage, explicitly suggested as gym or workshop space"},
+ desc:"Executive four-bedroom home on Kingsmere with flexible space across two floors. Open-plan kitchen/dining room with a generous central island and direct garden access; bright sitting room opening through double doors to a large paved patio; separate utility; dedicated study. Four double bedrooms including a master suite with ensuite shower room. Low-maintenance garden, double garage and driveway. No estate management charge.",
+ why:"<b>Best space-per-pound on the whole shortlist at roughly £306/sq ft</b> — 2,012 sq ft and a double garage for the same money as a 1,375 sq ft house in Chipping Norton. Seven weeks listed with no reduction is your lever; the price is well above OX26's £510k top quartile, so push.",
+ otm:"",zoo:""},
+
+{id:91131447,area:"bicester",addr:"Woodland Close, Launton, Bicester OX26",beds:4,size:"1,415 sq ft",agent:"Barton Fleming, Bicester",since:"2026-07-21",listed:"Added 21 Jul",fresh:"",score:5,part:1,adv:625000,open:595000,ceil:615000,
  photo:"https://media.rightmove.co.uk/property-photo/d1b3db4f8/91131447/d1b3db4f8cf4c65f28a9474350d80bea.jpeg",
  fp:"https://media.rightmove.co.uk/dir/property-floorplan/fa73fdedd/91131447/fa73fdedde9dd2f4ed40f68b33dbd5ff.jpeg",
- links:{rm:91131447}},
-{id:91709838,addr:"Croxton Square, Bicester",area:"Bicester",price:640000,beds:4,score:4,first:"2026-08-06",freshTag:"Added 6 Aug",fresh:1,
- c:{u:0,e:2,o:1,w:2,f:2,g:2},open:612000,ceil:628000,
- desc:"Three-storey home: kitchen-breakfast-family room, dining room, cloakroom, vaulted master with ensuite + dressing area, second-floor bedroom with ensuite plus a fifth bedroom/study, garage and driveway. EPC B.",
- why:"Two ensuites, a dedicated study and a garage — but no utility room, which is a fixed miss to weigh. Three weeks on at the top of the OX26 range: open £612k, ceiling £628k. The kitchen-family room functions as open-plan even if not labelled so.",
+ c:{u:"y",e:"y",o:"y",w:"y",s:"y",g:"p"},
+ cn:{s:"Garage already converted to a garden office and gym",g:"Garage converted — driveway parking only"},
+ desc:"Modern build in a village cul-de-sac backing onto Woodland Trust land. Sloping open porch, entrance hall, cloakroom; living room 15'1 x 13'11 with fireplace; 24'6 kitchen breakfast-cum-diner with bi-fold doors to the rear; a 13ft utility room extension with vaulted ceiling and skylights. Four bedrooms (three double, one single), family bathroom and ensuite to bedroom one. Garage converted to garden office and gym. EPC D (63).",
+ why:"The <b>office is already built</b> — no conversion project, no planning risk. Backing onto Woodland Trust land is genuinely rare. The trade-off is you lose the garage as a garage, and EPC D means higher running costs than the new-builds here; both are fair points to raise at 4.8% below asking.",
+ otm:"",zoo:"https://www.zoopla.co.uk/for-sale/details/73768400/"},
+
+{id:90740325,area:"brackley",addr:"Mill Road, Whitfield, Brackley NN13",beds:4,size:"1,691 sq ft",agent:"Fine &amp; Country",since:"2026-08-03",listed:"Reduced 3 Aug",fresh:"red",score:5,part:1,adv:700000,open:655000,ceil:685000,
+ photo:"https://media.rightmove.co.uk/property-photo/4606c74c8/90740325/4606c74c86e07292fe1d22f9c93b01af.jpeg",
+ fp:"https://media.rightmove.co.uk/dir/property-floorplan/cc720b3a8/90740325/cc720b3a8a28fe2cbf012efc1c336cc1.jpeg",
+ c:{u:"y",e:"y",o:"y",w:"y",s:"y",g:"p"},
+ cn:{e:"Two ensuites plus family bathroom",g:"Carport with double wooden gates rather than an enclosed garage"},
+ desc:"Recently built in local Cotswold stone, brick and timber cladding. Spacious dual-aspect living room and study, fully fitted kitchen/dining room, hallway, cloakroom and utility. Four double bedrooms, three bathrooms (two ensuite). Air-source underfloor and radiator heating, fully double glazed, carport with double gates, landscaped private rear garden. No chain, 10-year LABC warranty, EPC B, freehold.",
+ why:"<b>The biggest negotiation room on the list.</b> At £700k it sits far above NN13's £550k top quartile, it has already been reduced once, it is chain-free, and it is with a premium-brand agent — four separate reasons the vendor is likely to engage. Opening at £655k is assertive but defensible on the outcode data. Note the carport is not a garage.",
+ otm:"https://www.onthemarket.com/details/19908139/",zoo:""},
+
+{id:90642198,area:"bicester",addr:"Hawksmead, Old Langford, Bicester OX26",beds:4,size:"1,152 sq ft",agent:"iad / Avocado Property",since:"2026-08-27",listed:"Reduced 27 Aug",fresh:"red",score:4,part:2,adv:490000,open:468000,ceil:485000,
+ photo:"https://media.rightmove.co.uk/property-photo/9e493795c/90642198/9e493795ca85d4e9e9128a389616872b.jpeg",
+ fp:"https://media.rightmove.co.uk/dir/property-floorplan/6ce56e223/90642198/6ce56e223242394e5d7a659bb236019e.jpeg",
+ c:{u:"p",e:"y",o:"y",w:"y",s:"p",g:"y"},
+ cn:{u:"Utility area within the kitchen/diner, not a separate room",s:"No study; conservatory or garage would be the office candidate"},
+ desc:"Cul-de-sac position in the popular Old Langford area, a short walk from Langford Primary, the surgery and shops. Kitchen/diner with utility area stretching across the rear overlooking the garden; conservatory with double doors onto a wider-than-average south-westerly garden; downstairs W.C.; spacious living room. Four bedrooms with ensuite to the main. Garage, off-road parking and EV charger already installed.",
+ why:"<b>The cheapest genuinely strong option</b> and the best entry point on the list. At £490k it is above the OX26 median but comfortably inside the £510k top quartile, so it is fairly priced rather than cheap. Reduced eight days ago, which usually means the vendor has recalibrated and will take a sensible offer near the new figure.",
+ otm:"",zoo:"https://www.zoopla.co.uk/for-sale/details/73662873/"},
+
+{id:92587044,area:"brackley",addr:"Utah Lane, Brackley NN13",beds:4,size:"3 receptions",agent:"eXp UK",since:"2026-05-26",listed:"Added 26 May",fresh:"stale",score:5,part:1,adv:500000,open:470000,ceil:490000,
+ photo:"https://media.rightmove.co.uk/property-photo/af335a500/92587044/af335a5008dfbff11888a426b4c9ee23.jpeg",
+ fp:"https://media.rightmove.co.uk/dir/property-floorplan/ff36fb1c3/92587044/ff36fb1c3b4a0efa16167a79c9ead6f4.jpeg",
+ c:{u:"y",e:"y",o:"y",w:"y",s:"p",g:"y"},
+ cn:{s:"Separate dining room currently used as a playroom — no dedicated study"},
+ desc:"Charles Church-built home in a quiet cul-de-sac with no through traffic. High ceilings and generously sized rooms; expansive living room, separate dining room currently used as a playroom, kitchen-diner with upgraded finishes and a six-ring gas hob, utility, cloakroom. Master with ensuite plus family bathroom. Garage with parking. Sixteen solar panels, a 5 kWh battery and an EV charging point.",
+ why:"<b>Over fourteen weeks on the market</b> — by some distance the longest-listed home on this shortlist, and unreduced throughout. That is the strongest single negotiating signal here. The solar array and battery are a real running-cost saving that the asking price does not appear to reflect.",
+ otm:"https://www.onthemarket.com/details/17639110/",zoo:"https://www.zoopla.co.uk/for-sale/details/70989776/"},
+
+{id:174578018,area:"bicester",addr:"Osprey Close, Bicester OX26",beds:4,size:"1,180 sq ft",agent:"Barton Fleming, Bicester",since:"2026-05-13",listed:"Reduced 13 May",fresh:"red",score:4,part:1,adv:525000,open:495000,ceil:518000,
+ photo:"https://media.rightmove.co.uk/property-photo/108d51672/174578018/108d516728ec4c117bbcf69efb5e6fab.jpeg",
+ fp:"https://media.rightmove.co.uk/dir/property-floorplan/6ae012bec/174578018/6ae012bec51da88f7663c50e0ca83074.jpeg",
+ c:{u:"n",e:"y",o:"y",w:"y",s:"y",g:"p"},
+ cn:{u:"No utility room evidenced anywhere in the listing",s:"Garage converted to a study/office/family room",g:"Garage converted — but a six-car driveway remains"},
+ desc:"Head of a cul-de-sac with a wide, deep driveway taking up to six cars and two EV charging points. Luxury refitted kitchen/diner spanning over 24 feet with quartz worktops, Belfast sink, Quooker tap, twin ovens and induction hob, opening to the garden through French doors; the living room flows openly from it with a front bay window. Versatile study/office/family room converted from the garage. Refitted cloakroom and ensuite, four bedrooms, family bathroom.",
+ why:"Reduced back in May and <b>still unsold nearly sixteen weeks later</b>. It is also double-listed on Zoopla at a stale £550k by a second agent, which usually means an agency change and a motivated vendor. The missing utility room is the one real compromise, and it is a fair reason to open near 6% below.",
+ otm:"https://www.onthemarket.com/details/19739691/",zoo:"https://www.zoopla.co.uk/for-sale/details/72971208/"},
+
+{id:90407424,area:"oxford",addr:"Cranbrook Drive, Kennington, Oxford OX1",beds:4,size:"1,577 sq ft",agent:"Chancellors, Botley",since:"2026-07-17",listed:"Reduced 17 Jul",fresh:"red",score:3,part:2,adv:550000,open:520000,ceil:542000,
+ photo:"https://media.rightmove.co.uk/property-photo/379a08326/90407424/379a0832666ae3a60b7503d5f5c38742.jpeg",
+ fp:"https://media.rightmove.co.uk/dir/property-floorplan/acd1e4ca7/90407424/acd1e4ca742880d2b39c840cb638b4e0.png",
+ c:{u:"n",e:"y",o:"p",w:"y",s:"p",g:"y"},
+ cn:{u:"No utility room in the listing",e:"Jack &amp; Jill ensuite shared with bedroom two",o:"Fitted kitchen/dining room, not open-plan",s:"250 sq ft integral garage convertible subject to planning permission"},
+ desc:"Corner plot with roughly 1,600 sq ft over two floors and gardens to front, rear and sides. Entrance hall with separate cloakroom, spacious reception with feature fireplace and French doors through to a second reception, fitted kitchen/dining room with a door to the 250 sq ft integral garage and rear access to a side driveway and covered outbuilding. Principal L-shaped bedroom with built-in wardrobe and Jack & Jill ensuite, plus three further bedrooms. Immediate vacant possession, no forward chain.",
+ why:"<b>Vacant with immediate possession and already reduced seven weeks ago</b> — an empty house costs the vendor money every month, which is real leverage. £550k against the OX1 median of £521k is a modest premium for 1,577 sq ft. The Jack & Jill ensuite arrangement and absent utility are the compromises.",
+ otm:"https://www.onthemarket.com/details/19496014/",zoo:"https://www.zoopla.co.uk/for-sale/details/73606345/"},
+
+{id:90408975,area:"chipnorton",addr:"Ellis Lane, Chipping Norton OX7",beds:4,size:"1,606 sq ft",agent:"Chancellors, Chipping Norton",since:"2026-07-20",listed:"Reduced 20 Jul",fresh:"red",score:5,part:0,adv:560000,open:532000,ceil:552000,
+ photo:"https://media.rightmove.co.uk/property-photo/2c9dbe105/90408975/2c9dbe10561f74b2b9d7948d2b9cd521.jpeg",
+ fp:"https://media.rightmove.co.uk/dir/property-floorplan/a6e4c92ec/90408975/a6e4c92ecfe5c947e0734dbdaa1c3471.png",
+ c:{u:"y",e:"y",o:"n",w:"y",s:"y",g:"y"},
+ cn:{o:"Two reception rooms; no open-plan kitchen/diner evidenced in the listing"},
+ desc:"Contemporary fully detached four-bedroom home presented to an excellent standard with a beautifully landscaped rear garden. Two reception rooms plus a separate study, cloakroom and utility room. Good-sized principal ensuite bedroom and three further doubles. Solar panelling and 7 kWh EV charging. Garage and off-street parking. Full floorplan and professional photography noted as still to come.",
+ why:"<b>1,606 sq ft priced almost exactly at the OX7 median</b> of £555k — the best size-for-money in Chipping Norton, and £55k less than Morris Close for 231 more square feet. Reduced seven weeks ago and the agent is still awaiting professional photography, which points to a relaunch and a vendor who wants a deal. The open-plan kitchen is the one unconfirmed criterion — worth checking on a viewing.",
+ otm:"https://www.onthemarket.com/details/19684068/",zoo:"https://www.zoopla.co.uk/for-sale/details/73606585/"},
+
+{id:91709838,area:"bicester",addr:"Croxton Square, Bicester OX26",beds:4,size:"1,794 sq ft",agent:"Barton Fleming, Bicester",since:"2026-08-06",listed:"Added 6 Aug",fresh:"",score:5,part:0,adv:640000,open:608000,ceil:630000,
  photo:"https://media.rightmove.co.uk/property-photo/4eaf07f1e/91709838/4eaf07f1e2b66673e10372bcb24e2d87.jpeg",
  fp:"https://media.rightmove.co.uk/dir/property-floorplan/459213a77/91709838/459213a772f44f83e764c3f04a8a5ee1.jpeg",
- links:{rm:91709838,z:"73907926"}},
-{id:89662800,addr:"Green Lane, Chesterton (The Fuller — new build)",area:"Chesterton",price:500000,beds:3,score:4,first:"2026-06-15",freshTag:"New build",fresh:2,
- c:{u:2,e:2,o:2,w:1,f:2,g:0},open:475000,ceil:490000,
- desc:"Brand-new Bellway 'Fuller' at The Lanes, Chesterton: open-plan kitchen/dining, separate utility, dual-aspect study, dual-aspect living room with two sets of French doors, ensuite to bedroom 1. Chain-free with 10-year NHBC warranty.",
- why:"New-build pricing is negotiable through incentives even when the sticker isn't: push for £475k or the equivalent in upgrades/stamp-duty contribution (Bellway is actively advertising incentives). No garage is the trade-off; the dedicated study covers the office need. Chain-free = fast move.",
- photo:"https://media.rightmove.co.uk/property-photo/40680cb62/89662800/40680cb628f1b6e2b496ecad84b35833.jpeg",
- fp:"https://media.rightmove.co.uk/dir/property-floorplan/35507c038/89662800/35507c038cc30dc03e38d1c0aa83428f.jpeg",
- links:{rm:89662800,otm:"19701988"}},
-{id:174630599,addr:"Plot 280, The Fuller, Abingdon OX14",area:"Abingdon",price:515000,beds:3,score:4,first:"2026-04-18",freshTag:"New build · incentives",fresh:3,
- c:{u:2,e:2,o:2,w:1,f:2,g:0},open:487000,ceil:505000,
- desc:"Same Bellway 'Fuller' layout in Abingdon: open-plan kitchen/dining, utility, dual-aspect study and living room, ensuite to bed 1. Award-winning site manager (NHBC Pride in the Job 2025); 'save thousands on selected plots' incentive advertised.",
- why:"Bellway is openly advertising savings on this development and the plot has been listed since spring — strong incentive leverage. £515k vs OX14 detached median £443k. Open at £487k or demand the advertised 'thousands' as a price cut, ceiling £505k all-in.",
- photo:"https://media.rightmove.co.uk/property-photo/3e6e06b32/174630599/3e6e06b32d1cdd853b80a949119e9427.jpeg",
- fp:"https://media.rightmove.co.uk/dir/property-floorplan/63c5438bb/174630599/63c5438bbbcf21e682685935958b6c83.jpeg",
- links:{rm:174630599}},
-{id:172385027,addr:"Hawksmead, Bicester (3-bed)",area:"Bicester",price:425000,beds:3,score:4,first:"2026-02-19",freshTag:"6+ months · chain-free",fresh:3,
- c:{u:0,e:2,o:2,w:2,f:1,g:2},open:395000,ceil:410000,
- desc:"Three-bed detached siding onto Langford Nature Reserve: cloakroom, kitchen diner, ensuite plus family bathroom, garage, parking for two. NO UPPER CHAIN. EPC C, Council Tax D.",
- why:"On the market since February — over six months — and chain-free: the strongest negotiation position on this list. £425k barely exceeds the OX26 median (£422k); open at £395k (-7%) and a £405–410k close looks very achievable. No utility is the miss; the garage could host one or an office.",
- photo:"https://media.rightmove.co.uk/property-photo/6745145ea/172385027/6745145ea66e95a55a384f4a2b40ab54.jpeg",
- fp:"https://media.rightmove.co.uk/dir/property-floorplan/7b3b3ec3b/172385027/7b3b3ec3b06d1b37c98a31a9bcd80764.jpeg",
- links:{rm:172385027}},
-{id:167915360,addr:"Ludlow Road, Kingsmere, Bicester",area:"Bicester",price:435000,beds:4,score:4,first:"2025-10-07",freshTag:"10+ months · reduced",fresh:3,
- c:{u:0,e:2,o:2,w:2,f:1,g:2},open:405000,ceil:420000,
- desc:"Four-bed LINK-detached on the popular Kingsmere development, close to schools and Bicester Village: kitchen/dining room, cloakroom, master ensuite, garage with parking, EPC B. NO ONWARD CHAIN.",
- why:"Ten months on market, already reduced, and chain-free — maximum leverage. Note it is link-detached (shares the garage wall), which explains the price and is worth checking against the 'detached' must-have. Open £405k, ceiling £420k vs OX26 median £422k.",
- photo:"https://media.rightmove.co.uk/property-photo/f75341007/167915360/f75341007ad13226358e25ba36c102a1.jpeg",
- fp:"https://media.rightmove.co.uk/dir/property-floorplan/171218a8a/167915360/171218a8a00122faf0db6f833a5281f2.jpeg",
- links:{rm:167915360,z:"72142015"}},
-{id:90404886,addr:"York Close, Glory Farm, Bicester",area:"Bicester",price:375000,beds:3,score:3,first:"2026-07-02",freshTag:"Reduced 24 Jun · chain-free",fresh:2,
- c:{u:2,e:0,o:2,w:2,f:0,g:0},open:355000,ceil:368000,
- desc:"Head-of-cul-de-sac detached with the garage converted into a large kitchen/diner, ground-floor WC/utility room, engineered oak flooring, landscaped garden, driveway. Chain-free; 1.1 miles to Bicester North (direct Marylebone trains).",
- why:"The value play: £47k under the OX26 median, already reduced and chain-free. Only 3/6 (no ensuite, garage already absorbed into the kitchen) but the budget headroom (~£300k vs the £700k cap) funds any conversion or extension you want. Open £355k, ceiling £368k.",
- photo:"https://media.rightmove.co.uk/property-photo/a4518acea/90404886/a4518aceaf6a2a86a344d6e365109146.jpeg",
- fp:"https://media.rightmove.co.uk/dir/property-floorplan/497c22f55/90404886/497c22f5517840b9b84792cd3aadabd9.png",
- links:{rm:90404886,z:"73606157"}}
+ c:{u:"n",e:"y",o:"y",w:"y",s:"y",g:"y"},
+ cn:{u:"No utility room — laundry space not identified",e:"Two ensuites; master has a vaulted ceiling and dressing area",w:"Cloakroom ground, bathroom first, ensuite second — one per floor"},
+ desc:"Three-storey home with entrance hall and cloakroom, separate dining room with bay, living room 14'1 x 13'9 with French doors, and a 20'1 kitchen-breakfast-family room with Sonos speakers and French doors to the rear. First floor has three bedrooms and the family bathroom; the master has a vaulted ceiling, good-sized ensuite and dressing area. Second floor adds bedroom two with its own ensuite plus a fifth bedroom/study. Front and rear gardens, garage and driveway. EPC B (85).",
+ why:"1,794 sq ft with two ensuites and a dedicated second-floor study — <b>the most bedrooms-plus-office flexibility on the list</b>. At £640k it is £130k above OX26's top quartile, so you are paying a clear premium for size and spec. Four weeks listed gives moderate room; the missing utility is the honest weak point.",
+ otm:"",zoo:"https://www.zoopla.co.uk/for-sale/details/73907926/"}
 ];
 
-const CRIT=[["u","Utility"],["e","Ensuite"],["o","Open-plan K/D"],["w","WC each floor"],["f","Office"],["g","Garage"]];
-const SYM={2:"✓",1:"~",0:"✗"};
-const CLS={2:"y",1:"p",0:"n"};
-let area="all", sort="score";
+const LBL={u:"Utility",e:"Ensuite",o:"Open-plan K/D",w:"WC each floor",s:"Office",g:"Garage"};
+const SYM={y:"✓",p:"~",n:"✗"};
+const gbp=n=>"£"+n.toLocaleString("en-GB");
+let area="all", sort="match";
 
-function freshClass(p){return p.fresh===1?"new":""}
-function room(p){return (p.price-p.open)/p.price}
+function nego(p){return (p.adv-p.open)/p.adv*100;}
+
+function card(p){
+  const chips=Object.keys(LBL).map(k=>{
+    const v=p.c[k], note=p.cn&&p.cn[k]?' title="'+p.cn[k]+'"':'';
+    return '<span class="chip '+v+'"'+note+'>'+SYM[v]+' '+LBL[k]+'</span>';
+  }).join("");
+  let fr='<span class="fresh">'+p.listed+'</span>';
+  if(p.fresh==="new") fr='<span class="fresh new">NEW this week</span>';
+  else if(p.fresh==="red") fr='<span class="fresh red">'+p.listed+'</span>';
+  else if(p.fresh==="stale") fr='<span class="fresh">On market 14 weeks</span>';
+  const links='<a href="https://www.rightmove.co.uk/properties/'+p.id+'" target="_blank" rel="noopener">Rightmove</a>'
+    +(p.otm?'<a href="'+p.otm+'" target="_blank" rel="noopener">OnTheMarket</a>':'')
+    +(p.zoo?'<a href="'+p.zoo+'" target="_blank" rel="noopener">Zoopla</a>':'')
+    +(p.fp?'<a href="'+p.fp+'" target="_blank" rel="noopener">Floorplan</a>':'');
+  return '<article class="card">'
+   +'<div class="photo"><img loading="lazy" src="'+p.photo+'" alt="'+p.addr+'">'
+   +'<span class="badge g'+p.score+'">'+p.score+'/6 match'+(p.part?' +'+p.part+'~':'')+'</span>'+fr+'</div>'
+   +'<div class="body">'
+   +'<div class="addr">'+p.addr+'</div>'
+   +'<div class="meta">'+p.beds+' bed detached · '+p.size+' · '+p.agent+' · listed since '+p.since+' · negotiation room ~'+nego(p).toFixed(1)+'%</div>'
+   +'<div class="prices">'
+     +'<div class="p-adv"><span>Advertised</span><b>'+gbp(p.adv)+'</b></div>'
+     +'<div class="p-open"><span>Opening offer</span><b>'+gbp(p.open)+'</b></div>'
+     +'<div class="p-ceil"><span>Target ceiling</span><b>'+gbp(p.ceil)+'</b></div>'
+   +'</div>'
+   +'<div class="chips">'+chips+'</div>'
+   +'<div class="desc">'+p.desc+'</div>'
+   +'<div class="why">'+p.why+'</div>'
+   +'<div class="links">'+links+'</div>'
+   +'</div></article>';
+}
+
 function render(){
   let list=P.filter(p=>area==="all"||p.area===area);
-  const s={score:(a,b)=>b.score-a.score||a.price-b.price,
-    priceAsc:(a,b)=>a.price-b.price, priceDesc:(a,b)=>b.price-a.price,
-    fresh:(a,b)=>b.first.localeCompare(a.first),
-    room:(a,b)=>room(b)-room(a)};
-  list.sort(s[sort]);
-  document.getElementById("grid").innerHTML=list.map(p=>`
-  <div class="card">
-    <div class="photo">
-      <img loading="lazy" src="${p.photo}" alt="${p.addr}">
-      <span class="badge s${p.score}">${p.score}/6 match</span>
-      <span class="fresh ${freshClass(p)}">${p.freshTag}</span>
-    </div>
-    <div class="body">
-      <div class="addr">${p.addr}</div>
-      <div class="meta">${p.beds} bed detached · listed since ${p.first} · negotiation room ~${Math.round(room(p)*100)}%</div>
-      <div class="prices">
-        <div>Advertised<b>£${p.price.toLocaleString()}</b></div>
-        <div class="rec">Opening offer<b>£${p.open.toLocaleString()}</b></div>
-        <div class="rec">Target ceiling<b>£${p.ceil.toLocaleString()}</b></div>
-      </div>
-      <div class="chips">${CRIT.map(([k,label])=>`<span class="chip ${CLS[p.c[k]]}">${SYM[p.c[k]]} ${label}</span>`).join("")}</div>
-      <div class="desc">${p.desc}</div>
-      <div class="rationale">💡 ${p.why}</div>
-      <div class="links">
-        <a href="https://www.rightmove.co.uk/properties/${p.links.rm}" target="_blank">Rightmove</a>
-        ${p.links.otm?`<a href="https://www.onthemarket.com/details/${p.links.otm}/" target="_blank">OnTheMarket</a>`:""}
-        ${p.links.z?`<a href="https://www.zoopla.co.uk/for-sale/details/${p.links.z}/" target="_blank">Zoopla</a>`:""}
-        <a href="${p.fp}" target="_blank">Floorplan</a>
-      </div>
-    </div>
-  </div>`).join("");
+  const S={
+    match:(a,b)=>b.score-a.score||b.part-a.part||a.adv-b.adv,
+    plow:(a,b)=>a.adv-b.adv,
+    phigh:(a,b)=>b.adv-a.adv,
+    new:(a,b)=>b.since.localeCompare(a.since),
+    nego:(a,b)=>nego(b)-nego(a)
+  };
+  list=list.slice().sort(S[sort]);
+  const g=document.getElementById("grid");
+  g.innerHTML=list.length?list.map(card).join(""):'<div class="none">No properties match that filter.</div>';
 }
+
 document.getElementById("filters").addEventListener("click",e=>{
-  if(!e.target.dataset.area)return;
-  area=e.target.dataset.area;
-  document.querySelectorAll(".fbtn").forEach(b=>b.classList.toggle("active",b===e.target));
-  render();
+  const b=e.target.closest("button"); if(!b) return;
+  document.querySelectorAll("#filters button").forEach(x=>x.classList.remove("on"));
+  b.classList.add("on"); area=b.dataset.a; render();
 });
 document.getElementById("sort").addEventListener("change",e=>{sort=e.target.value;render();});
 render();
