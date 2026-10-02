@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>House Hunt — Oxfordshire &amp; South Northants · 25 Sep 2026</title>
-<style>
-:root{
- --bg:#0f1419; --panel:#171e26; --panel2:#1d2630; --line:#2a3542;
- --ink:#e8eef5; --dim:#93a3b5; --faint:#6b7c8f;
- --ok:#3fbf7f; --amber:#e8a33d; --no:#5a6775;
- --accent:#5b9cf8; --accent2:#7ee0c0; --warn:#ff7b6b;
-}
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>House Hunt — Oxfordshire &amp; South Northants · 2 Oct 2026</title><style>:root{--bg:#0f1419;--panel:#171e26;--panel2:#1d2630;--line:#2a3542;--ink:#e8eef5;--dim:#93a3b5;--faint:#6b7c8f;--ok:#3fbf7f;--amber:#e8a33d;--no:#5a6775;--accent:#5b9cf8;--accent2:#7ee0c0;--warn:#ff7b6b}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1280px;margin:0 auto;padding:28px 20px 80px}
@@ -29,6 +18,7 @@ h1{margin:0 0 4px;font-size:27px;letter-spacing:-.4px}
 .changes ul{margin:0;padding-left:18px;color:var(--dim)}
 .changes li{margin:4px 0}
 .changes b{color:var(--ink)}
+code{font-size:.9em;color:var(--accent2)}
 .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:26px 0 18px}
 .fbtn{background:var(--panel);border:1px solid var(--line);color:var(--dim);border-radius:999px;padding:7px 15px;font-size:13px;cursor:pointer;transition:.12s}
 .fbtn:hover{border-color:var(--accent);color:var(--ink)}
@@ -57,6 +47,7 @@ select{background:var(--panel);border:1px solid var(--line);color:var(--ink);bor
 .chip.y{color:var(--ok);border-color:#26493a}
 .chip.p{color:var(--amber);border-color:#4d3c1c;cursor:help;border-style:dashed}
 .chip.n{color:var(--no);opacity:.6}
+.chip.n[title]{cursor:help}
 .desc{font-size:13px;color:var(--dim);line-height:1.5}
 .why{font-size:13px;line-height:1.5;background:var(--panel2);border-left:2px solid var(--accent);border-radius:0 6px 6px 0;padding:9px 12px;color:#c7d5e4}
 .links{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:4px}
@@ -66,291 +57,62 @@ footer{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);color:v
 footer h4{color:var(--dim);font-size:12px;text-transform:uppercase;letter-spacing:.8px;margin:0 0 8px}
 .disc{margin-top:14px;padding:11px 14px;background:var(--panel);border:1px solid var(--line);border-radius:8px;color:var(--dim)}
 .empty{color:var(--faint);padding:40px;text-align:center;grid-column:1/-1}
-@media(max-width:560px){.grid{grid-template-columns:1fr}select{margin-left:0;width:100%}}
-</style>
-</head>
-<body>
-<div class="wrap">
-<header>
-  <h1>House Hunt — 3–4 Bed Detached, £500k Ceiling</h1>
-  <div class="sub">Bicester · Brackley · Deddington · Chesterton · Chipping Norton · Steeple Aston · Oxford &nbsp;—&nbsp; 3-mile radius each. Refreshed <b>Friday 25 September 2026</b>.</div>
-  <div class="crit">
-    <span><b>Must:</b> 3–4 bed detached</span>
-    <span><b>Must:</b> ≤ £500,000</span>
-    <span>Utility room</span>
-    <span>Master ensuite</span>
-    <span>Open-plan kitchen/diner</span>
-    <span>WC on every floor</span>
-    <span>Office (or convertible garage)</span>
-    <span>Garage</span>
-    <span style="color:var(--warn);border-color:#5a3330">Excluded: Ambrosden</span>
-  </div>
-  <div class="stats" id="stats"></div>
-  <div class="changes">
-    <h3>Changes since last week</h3>
-    <ul>
-      <li><b>Price-cap correction.</b> 13 of last week's 15 cards were advertised <b>above</b> £500,000 (£525k–£700k). They breached the hard ceiling and have been dropped. This week's list is re-derived with <code>maxPrice=500000</code> enforced at the search layer.</li>
-      <li><b>Gone under offer:</b> Hawksmead, Old Langford, Bicester OX26 (£490,000) is now <b>Sold STC</b>.</li>
-      <li><b>Carried over:</b> Utah Lane, Brackley NN13 (£500,000) — still available, now 17 weeks on market with no reduction.</li>
-      <li><b>16 new entries</b> this week, including three confirmed 6/6 matches: Chipperfield Park Road (Bloxham), Jutland Drive (Brackley) and The Village Close (Upper Arncott).</li>
-      <li>All 17 listings below were confirmed <b>Available</b> today via an <code>includeSSTC=true</code> status re-read.</li>
-    </ul>
-  </div>
-</header>
-
-<div class="controls" id="controls"></div>
-<div class="grid" id="grid"></div>
-
-<footer>
-  <h4>Methodology</h4>
-  Rightmove searched live on 25 Sep 2026 via <code>locationIdentifier=REGION^&lt;id&gt;</code> with <code>radius=3.0</code>, <code>propertyTypes=detached</code>, <code>minBedrooms=3</code>, <code>maxBedrooms=4</code>, <code>maxPrice=500000</code>, paged to exhaustion. 225 results → 146 unique → 139 after removing Ambrosden and anything over the cap. 41 full detail pages were decoded and re-scored on complete key-features and description text, then 17 shortlisted and hand-reviewed line by line.
-  <br><br>
-  <b>Scoring.</b> The n/6 badge counts only criteria <b>confirmed in writing</b> in the listing. Hedged language — "potential to create", "could be converted", "scope for", or a utility <i>cupboard/area</i> rather than a room — is recorded as an amber <b>~</b> chip with a hover tooltip and reported as a <b>+N~</b> suffix. Partials never count toward the score.
-  <br><br>
-  <b>Comparables.</b> Median / interquartile sold prices for detached houses in the last 2 years, read from Rightmove house-price data on the day: OX26 £410k (IQR £250k–£520k, n=468) · OX25 £520k (£364k–£643k, n=444) · NN13 £425k (£300k–£575k, n=492) · OX15 £425k (£355k–£606k, n=471) · OX14 £453k (£323k–£582k, n=465) · OX7 £520k (£375k–£670k, n=435).
-  <br><br>
-  <b>Availability.</b> Each area search was re-run with <code>includeSSTC=true</code> and each listing's <code>displayStatus</code> read directly — the only reliable Available / Under offer / Sold STC signal.
-  <br><br>
-  <b>Cross-portal.</b> OnTheMarket has changed its page structure and no longer exposes the <code>__NEXT_DATA__</code> payload this dashboard parsed; no reliable street-and-price match could be made this week, so OnTheMarket and Zoopla links are omitted rather than guessed.
-  <div class="disc"><b>This is research, not valuation advice.</b> Opening-offer and ceiling figures are derived from public sold-price comparables adjusted for size, specification, time on market, reductions, chain position and new-build incentives. They are a negotiating starting point only. Get a RICS survey and independent valuation before committing to any offer, and take your own professional advice on price.</div>
-</footer>
+@media(max-width:560px){.grid{grid-template-columns:1fr}select{margin-left:0}}
+</style></head><body><div class="wrap">
+<header><h1>House Hunt — 3–4 Bed Detached, £500k Ceiling</h1>
+<div class="sub">Bicester · Brackley · Deddington · Chesterton · Chipping Norton · Steeple Aston · Oxford — 3-mile radius each. Refreshed <b>Friday 2 October 2026</b>.</div>
+<div class="crit"><span><b>Must:</b> 3–4 bed detached</span><span><b>Must:</b> ≤ £500,000</span><span>Utility room</span><span>Master ensuite</span><span>Open-plan kitchen/diner</span><span>WC on every floor</span><span>Office (or convertible garage)</span><span>Garage</span><span>Excluded: Ambrosden</span></div>
+<div class="stats">
+<div class="stat"><div class="n">16</div><div class="l">Shortlisted</div></div>
+<div class="stat"><div class="n">3</div><div class="l">Confirmed 6/6</div></div>
+<div class="stat"><div class="n">8</div><div class="l">New this week</div></div>
+<div class="stat"><div class="n">£415k</div><div class="l">Cheapest</div></div>
+<div class="stat"><div class="n">142</div><div class="l">Available in search</div></div>
 </div>
-
+<div class="changes"><h3>Changes since last week (25 Sep)</h3><ul>
+<li><b>Gone under offer:</b> 'The Russell', Heyford Park OX25 (£440,000) is now marked <b>Reserved</b>.</li>
+<li><b>Dropped (correction):</b> Plot 34 'The Lymner', Abingdon OX14 (£450,000). The full listing shows it as <b>semi-detached</b>, and it doesn't appear in the detached-only search.</li>
+<li><b>Price cut:</b> Hawksmead, Bicester OX26 went from £425,000 to <b>£415,000</b> (29 Sep). Northampton Road, Brackley (new) was reduced on 30 Sep, ten days after listing.</li>
+<li><b>Score correction:</b> Chipperfield Park Road, Bloxham drops from 6/6 to <b>5/6 +1~</b>. On a full re-read the listing names three reception rooms but no office or study.</li>
+<li><b>8 new entries</b>, including a new confirmed 6/6 at <b>Orion Drive, Brackley</b> (£475k guide, just relisted), chain-free <b>Kempton Close, Kingsmere</b>, and a village find at <b>Worton Road, Middle Barton</b> (£425k, with office).</li>
+<li><b>Rotated out but still available:</b> Trenchard Circle, Ravencroft, Willow Brook (Lower Arncott), Cotefield Drive (Bodicote), York Close, Broad Street (Syresham) and College Square. Stronger matches replaced them; none went under offer.</li>
+<li>All 16 listings below were confirmed <b>Available</b> today through an <code>includeSSTC=true</code> status re-read.</li>
+</ul></div></header>
+<div class="controls" id="ctl"><button class="fbtn on" data-a="All">All</button><button class="fbtn" data-a="Brackley">Brackley</button><button class="fbtn" data-a="Bicester">Bicester</button><button class="fbtn" data-a="Bloxham">Bloxham</button><button class="fbtn" data-a="Heyford">Heyford</button><button class="fbtn" data-a="Middle Barton">Middle Barton</button>
+<select id="sort"><option value="score">Best match</option><option value="room">Biggest negotiation room</option><option value="lo">Price: low → high</option><option value="hi">Price: high → low</option><option value="new">Newest first</option><option value="old">Longest on market</option></select></div>
+<div class="grid" id="grid"></div>
+<footer><h4>Methodology</h4>
+Rightmove was searched live on 2 Oct 2026 using <code>locationIdentifier=REGION^&lt;id&gt;</code> with <code>radius=3.0</code>, <code>propertyTypes=detached</code>, 3–4 beds, <code>maxPrice=500000</code> and <code>includeSSTC=true</code>, paged to exhaustion. That gave 399 rows, then 262 unique listings after removing duplicates, Ambrosden and anything over the cap. Of those, 142 were Available, not plots. All 142 detail pages were decoded and auto-scored on the full key features and description, then the top candidates were re-read by hand and 16 shortlisted.<br><br>
+<b>Scoring.</b> The n/6 badge counts only criteria <b>confirmed in writing</b> in the listing. Hedged language ("potential to create", "could be used as", "scope for"), a combined cloakroom/utility, or a converted garage is recorded as an amber <b>~</b> chip with a hover tooltip and shown as a <b>+N~</b> suffix. Partials never count toward the score.<br><br>
+<b>Comparables.</b> Median / interquartile sold prices for detached houses over the last 2 years, from Rightmove house-price pages 1–3 read on the day: OX26 £400k (IQR £226k–£516k, n=504) · OX25 £520k (IQR £364k–£625k, n=450) · NN13 £425k (IQR £299k–£571k, n=504) · OX15 £435k (IQR £355k–£606k, n=486) · OX7 £522k (IQR £382k–£694k, n=483).<br><br>
+<b>Availability.</b> Read directly from each listing's search <code>displayStatus</code>, not from scraped page text.<br><br>
+<b>Cross-portal.</b> OnTheMarket links are matched on street name <i>and</i> exact price. Where two OTM listings share a street and price, the link is left out rather than guessed. Zoopla wasn't checked this week.
+<div class="disc"><b>This is research, not valuation advice.</b> Opening-offer and ceiling figures come from public sold-price comparables, adjusted for size, specification, time on market, reductions and chain position. Treat them as a starting point for negotiation only. Get a RICS survey and an independent valuation before you commit to any offer.</div>
+<p>Generated Friday 2 October 2026.</p></footer></div>
 <script>
-const TODAY = new Date(2026,8,25);
-const C = ["Utility room","Master ensuite","Open-plan kitchen/diner","WC on every floor","Office / convertible","Garage"];
-
-const P = [
-{id:93055668,area:"Bloxham",addr:"Chipperfield Park Road, Bloxham",out:"OX15",beds:4,size:null,agent:"Anker & Partners, Banbury",listed:"Added 11 Sep 2026",days:14,status:"Available",
- score:6,part:0,adv:500000,open:470000,ceil:495000,
- photo:"https://media.rightmove.co.uk/property-photo/2dc35056f/93055668/2dc35056f0ea1543118d2853ffa02314.jpeg",
- fp:"https://media.rightmove.co.uk/property-floorplan/5f6e488eb/93055668/5f6e488eb62f63f4eb755a63a1fdbc66.jpeg",
- c:["y","y","y","y","y","y"],t:{},
- desc:"Greatly extended four-bed with three reception rooms, open-plan kitchen/dining room opening to a separate utility, a study off the hallway, and a snug formed from part of the garage — the remaining tandem garage is retained with an internal door. Downstairs WC, ensuite shower and family bathroom. Sought-after village three miles from Banbury with schools for all ages.",
- why:"The only confirmed 6/6 at the cap, and it earns it — a real study, a real utility, and a garage that has already proved convertible. That leaves little to argue about on spec, so the leverage is thin: two weeks on market, no reduction, and OX15's detached median of £425k makes £500k look full but not unreasonable for an extended four-bed. Open around £470k to test whether the asking price has any give, and be prepared to go to £495k rather than lose it."},
-
-{id:93199395,area:"Brackley",addr:"Jutland Drive, Brackley NN13",out:"NN13",beds:4,size:null,agent:"eXp UK, East of England",listed:"Added 16 Sep 2026",days:9,status:"Available",
- score:6,part:0,adv:490000,open:465000,ceil:488000,
- photo:"https://media.rightmove.co.uk/property-photo/4675e1081/93199395/4675e1081aa271c3783b4d95b6f243e3.png",
- fp:"https://media.rightmove.co.uk/property-floorplan/668d95954/93199395/668d959541058cef34d7ce1832ba9246.png",
- c:["y","y","y","y","y","y"],t:{},
- desc:"Well-presented four-bed detached with two detached garages and parking. Kitchen/dining room with separate utility room, cloakroom, living room, study, master with ensuite and family bathroom.",
- why:"Every criterion confirmed in the agent's own words, and two garages means one can become the office outright without touching the study. Nine days on market is the problem — the agent has no reason to move yet and the listing is thin on detail, so book a viewing before anyone else does the maths. Open at £465k, hold £488k as the walk-away; NN13's detached median of £425k says you are paying for the garages, which is a fair trade here."},
-
-{id:175019534,area:"Upper Arncott",addr:"The Village Close, Upper Arncott, Bicester",out:"OX25",beds:4,size:null,agent:"Connells, Bicester",listed:"Reduced 9 Sep 2026",days:16,status:"Available",
- score:6,part:0,adv:500000,open:472000,ceil:500000,
- photo:"https://media.rightmove.co.uk/property-photo/22165bead/175019534/22165bead16b8092315ef93430bb702b.jpeg",
- fp:"https://media.rightmove.co.uk/property-floorplan/438c96532/175019534/438c96532eead6ef837726a873962f57.jpeg",
- c:["y","y","y","y","y","y"],t:{},
- desc:"Chain-free four-double-bedroom village detached. Entrance hall to a study described as ideal as a home office, ground-floor cloakroom, living room opening to the garden, bright kitchen diner with an adjoining utility room. Two of the four bedrooms have ensuite shower rooms, plus family bathroom. Driveway, garage, mature rear garden.",
- why:"Two ensuites, a named home office and no onward chain — on paper the most complete house here. The catch is that it is marketed as Offers in Excess of £500,000, so the agent is fishing above your hard ceiling and you may simply be outbid. That said, it has already been reduced once at 16 days, which suggests the OIEO framing is aspirational. Open at £472k, be explicit that £500k is an absolute ceiling, and let the chain-free position do the persuading."},
-
-{id:92587044,area:"Brackley",addr:"Utah Lane, Brackley NN13",out:"NN13",beds:4,size:null,agent:"eXp UK, East of England",listed:"Added 26 May 2026",days:122,status:"Available",
- score:5,part:1,adv:500000,open:462000,ceil:495000,
- photo:"https://media.rightmove.co.uk/property-photo/af335a500/92587044/af335a5008dfbff11888a426b4c9ee23.jpeg",
- fp:"https://media.rightmove.co.uk/property-floorplan/ff36fb1c3/92587044/ff36fb1c3b4a0efa16167a79c9ead6f4.jpeg",
- c:["y","y","y","y","p","y"],t:{4:"Listed as a 'separate dining room, currently used as a playroom' and an 'extra reception room' — a flexible space rather than a confirmed office."},
- desc:"Charles Church-built four-bed on a quiet cul-de-sac, high ceilings and generous room sizes. Kitchen/dining room with upgraded finishes and six-ring gas hob, utility room, cloakroom, living room plus a separate dining room currently used as a playroom. Master with ensuite, family bathroom, garage with parking. 16 solar panels, 5kWh battery and EV charging point.",
- why:"The one carried over from last week, and the running costs are the real story — owned solar with battery storage and an EV point take a meaningful bite out of the monthly bills. Seventeen weeks on the market at Offers Over £500,000 with not a single reduction tells you the asking price was set optimistically and the seller has been waiting rather than adjusting. That is exactly the position that rewards a firm, well-evidenced opening bid: £462k, with £495k as your ceiling."},
-
-{id:90290859,area:"Brackley",addr:"Lagonda Drive, Brackley NN13",out:"NN13",beds:4,size:1481,agent:"Alexander & Co, Brackley",listed:"Reduced 28 Aug 2026",days:28,status:"Available",
- score:5,part:0,adv:465000,open:440000,ceil:460000,
- photo:"https://media.rightmove.co.uk/property-photo/0b654d878/90290859/0b654d878d9225be31cb58b0ce149e6b.jpeg",
- fp:"https://media.rightmove.co.uk/property-floorplan/f29261176/90290859/f292611769e2ab5e43f9841d0fd7f9f3.jpeg",
- c:["y","y","y","y","n","y"],t:{},
- desc:"Very well-presented 1,481 sq ft four-bed. Entrance hall to living room, open-plan kitchen/diner with integrated double oven, gas hob, fridge/freezer and dishwasher, and a separate utility room housing the boiler and a built-in washing machine. Ground-floor cloakroom with WC. Four generous doubles upstairs, principal with ensuite shower room, plus family bathroom. Single garage and parking for two. 1,800 Mbps broadband available.",
- why:"At £314 per square foot this is the best-value genuinely modern house on the list, and the 1,800 Mbps line matters if the office is going to be used properly. The only miss is a dedicated office — with four doubles, one becomes the study without losing a bedroom you need. It was reduced four weeks ago, so the seller has already blinked once; open at £440k and hold £460k, because a second reduction is more likely than a bidding war at this spec."},
-
-{id:92493582,area:"Heyford Park",addr:"Nash Road, Heyford Park, Upper Heyford",out:"OX25",beds:3,size:964,agent:"Barton Fleming, Bicester",listed:"Added 28 Aug 2026",days:28,status:"Available",
- score:5,part:0,adv:425000,open:402000,ceil:422000,
- photo:"https://media.rightmove.co.uk/property-photo/4bdad96c2/92493582/4bdad96c22ee56e7968e3a31b65c8489.jpeg",
- fp:"https://media.rightmove.co.uk/property-floorplan/1cae720ab/92493582/1cae720ab1470db49c15bea835682013.jpeg",
- c:["y","y","y","y","n","y"],t:{},
- desc:"EPC B three-bed detached at Heyford Park. Entrance hall, combined cloakroom/utility room with integrated dishwasher and WC, bay-windowed living room, and a 15'6 kitchen diner with French doors to the side. Three bedrooms upstairs with family bathroom and ensuite. Front and rear gardens, garage and driveway parking.",
- why:"An EPC B rating and a garage under £430k is a rare combination, and the ground-floor utility doubling as the cloakroom is an efficient use of a modest footprint. The trade-off is size: 964 sq ft over three bedrooms means the office has to live in a bedroom, and £441 per square foot is punchy against OX25 comparables. Four weeks in with no movement gives a little room — open at £402k and treat £422k as the point where a larger house elsewhere becomes the better buy."},
-
-{id:166635992,area:"Helmdon",addr:"Wappenham Road, Helmdon, Brackley",out:"NN13",beds:4,size:1705,agent:"Quadrant, Bicester",listed:"Reduced 14 Sep 2026",days:11,status:"Available",
- score:4,part:2,adv:490000,open:458000,ceil:487000,
- photo:"https://media.rightmove.co.uk/property-photo/b7377d60e/166635992/b7377d60e32fc702a473fd0cbf69e352.jpeg",
- fp:"https://media.rightmove.co.uk/property-floorplan/08dc1d195/166635992/08dc1d195d46b29e203845471f1a368e.jpeg",
- c:["y","y","p","y","p","y"],t:{2:"Key features say 'kitchen/dining room' but the main description lists a separate 'dining room, kitchen' — the two contradict, so this is not treated as confirmed open-plan.",4:"A 'dining/extra reception room' is listed, which would serve as an office, but no office or study is named."},
- desc:"Stone-built detached in the sought-after village of Helmdon, beautifully presented across 1,705 sq ft. Four bedrooms, two bathrooms, triple-aspect sitting room, dining room, kitchen, cloakroom and utility/boot room. Low-maintenance enclosed garden with patio, potting shed and a separate west-facing courtyard off the kitchen. Garage, ample off-road parking, EV charger and owned solar panels with feed-in tariff.",
- why:"At £287 per square foot this is comfortably the best space-for-money on the shortlist, and owned solar panels on the old feed-in tariff are a genuinely valuable asset that rarely gets priced in properly. Note it is dual-listed — a second agent has the same house at £490,000 Offers Over — which usually signals a seller frustrated by a lack of offers. It was reduced eleven days ago, so momentum is with you: open at £458k, ceiling £487k, and reconcile the contradictory kitchen description at the viewing."},
-
-{id:90835230,area:"Upper Heyford",addr:"Trenchard Circle, Upper Heyford OX25",out:"OX25",beds:4,size:null,agent:"David Wilson Homes",listed:"Added 13 Jul 2026",days:74,status:"Available",
- score:4,part:1,adv:482000,open:458000,ceil:482000,
- photo:"https://media.rightmove.co.uk/property-photo/ba52ff36b/90835230/ba52ff36bd356de7fd6baa1c0e372782.jpeg",
- fp:"https://media.rightmove.co.uk/property-floorplan/2e143b9ee/90835230/2e143b9ee28a1ad30ccdd03809ba369d.png",
- c:["p","y","y","y","n","y"],t:{0:"Described as a 'utility cupboard', not a utility room."},
- desc:"New four-bedroom David Wilson home at Heyford Springs, overlooking green open space with a west/south-facing garden. Open-plan kitchen with dining area and French doors to the garden, plus a utility cupboard. Lounge, cloakroom and understairs storage on the ground floor; ensuite main bedroom, a second double and two singles above, with family bathroom. EV charger and solar panels fitted. Garage and driveway parking for two cars. £24,100 deposit-boost incentive advertised for key workers.",
- why:"A brand-new house with solar, an EV charger and a ten-year warranty removes most of the unknowns, and the green-space outlook is worth something on resale. Be clear-eyed about the utility though: a cupboard is not the utility room on your list, and there is no office. Developers almost never cut the headline price because it sets a precedent across the site — so put the pressure on incentives instead. Open at £458k expecting to be refused, then trade back to £482k in exchange for stamp duty, flooring and upgrades."},
-
-{id:93073764,area:"Bicester",addr:"Ravencroft, Bicester OX26",out:"OX26",beds:3,size:939,agent:"Barton Fleming, Bicester",listed:"Added 12 Sep 2026",days:13,status:"Available",
- score:4,part:1,adv:450000,open:415000,ceil:440000,
- photo:"https://media.rightmove.co.uk/property-photo/481a9cb7b/93073764/481a9cb7b5a693a8b6e1b7b8aafa0a34.jpeg",
- fp:"https://media.rightmove.co.uk/property-floorplan/79bca784a/93073764/79bca784aebeb4418459e69455441305.jpeg",
- c:["y","n","y","y","p","y"],t:{4:"A separate dining room is listed, which could serve as an office, but no office or study is named."},
- desc:"Built 1989 and vacant with no onward chain. Recessed porch, cloakroom, living room, dining room with patio door to the garden, and a large open-plan kitchen/breakfast room with utility. Three bedrooms and bathroom upstairs. Garage and driveway parking for two, deep frontage, rear garden not overlooked. Boiler recently replaced and doors changed to PVC; kitchen, bathroom, cloakroom and windows are all original. EPC C, no estate or management charges.",
- why:"Vacant, chain-free, not complicated by probate and with flexible viewings — the transaction itself would be about as easy as they come, and the deep plot and unoverlooked garden are hard to buy later. The house is honestly presented as needing modernisation, and the agent says so. That makes £479 per square foot for an unimproved 1989 three-bed hard to justify against an OX26 detached median of £410k. Open at £415k on the strength of the refurbishment cost and hold £440k; there is no ensuite here, so it must win on plot and price."},
-
-{id:173899493,area:"Abingdon",addr:"Plot 34 'The Lymner', Abingdon-on-Thames OX14",out:"OX14",beds:3,size:970,agent:"Bellway Homes (Thames Valley)",listed:"Reduced 17 Sep 2026",days:8,status:"Available",
- score:4,part:0,adv:450000,open:428000,ceil:450000,
- photo:"https://media.rightmove.co.uk/property-photo/cbad98eea/173899493/cbad98eeadab86f19cc72aec2ae2ddb1.jpeg",
- fp:"https://media.rightmove.co.uk/property-floorplan/25879a7f3/173899493/25879a7f37da12d80ec87fe4cd794f78.jpeg",
- c:["y","y","y","y","n","n"],t:{},
- desc:"Brand-new, chain-free double-fronted Bellway home. Dual-aspect living room spanning the length of the house, cloakroom and utility room adjacent, and a modern fitted kitchen and dining area with integrated appliances and French doors to the rear garden. Two doubles and a single bedroom above, ensuite to bedroom 1 and a contemporary family bathroom. 10-year NHBC Buildmark policy.",
- why:"A genuine utility room and a downstairs cloakroom in a 970 sq ft new build is better planning than most, and chain-free with an NHBC warranty means a clean, predictable purchase. The two misses are structural rather than fixable: no garage at all, so the convertible-office route is closed, and the third bedroom is a single. It was reduced eight days ago, which for a developer is a real signal. Open at £428k and use the recent cut as your justification; at £450k it sits almost exactly on the OX14 detached median."},
-
-{id:93226350,area:"Heyford Park",addr:"'The Russell', Heyford Park, Upper Heyford OX25",out:"OX25",beds:3,size:1025,agent:"Dorchester Living",listed:"Added 16 Sep 2026",days:9,status:"Available",
- score:4,part:0,adv:440000,open:420000,ceil:438000,
- photo:"https://media.rightmove.co.uk/property-photo/19e2d2020/93226350/19e2d20201cf45f62344b3d28c4b283b.jpeg",
- fp:"https://media.rightmove.co.uk/property-floorplan/343bf58b3/93226350/343bf58b3ccfd001e6664853bfe33cc1.jpeg",
- c:["n","y","y","y","n","y"],t:{},
- desc:"1,025 sq ft three-bedroom detached on a corner plot. Separate living room with bay window, open-plan kitchen and dining room with bi-fold doors to the garden, downstairs WC and storage. Three bedrooms upstairs including principal with ensuite, plus family bathroom. Integrated kitchen appliances, single garage and driveway parking.",
- why:"The corner plot and bi-fold doors give it more presence than the square footage suggests, and a garage at £440k keeps the office-conversion option open even though no office exists today. No utility room is the clear gap — in a three-bed that usually means the washing machine lives in the kitchen. Nine days on market and a developer seller means limited price movement, so open at £420k, cap at £438k, and push on specification extras if the price will not move."},
-
-{id:172385027,area:"Bicester",addr:"Hawksmead, Bicester OX26",out:"OX26",beds:3,size:null,agent:"Barton Fleming, Bicester",listed:"Added 8 Jul 2026",days:79,status:"Available",
- score:4,part:0,adv:425000,open:398000,ceil:420000,
- photo:"https://media.rightmove.co.uk/property-photo/6745145ea/172385027/6745145ea66e95a55a384f4a2b40ab54.jpeg",
- fp:"https://media.rightmove.co.uk/property-floorplan/7b3b3ec3b/172385027/7b3b3ec3b06d1b37c98a31a9bcd80764.jpeg",
- c:["n","y","y","y","n","y"],t:{},
- desc:"No upper chain, siding onto Langford Nature Reserve. Sloping open porch, cloakroom with WC, 14'1 living room with 2018 combi boiler, and a 15'6 kitchen diner with French doors to the garden. Three bedrooms upstairs with bathroom and ensuite. Front and rear gardens, garage and off-road parking for two. EPC C.",
- why:"Backing onto a nature reserve is the kind of thing that holds value through a soft market, and chain-free with a 2018 boiler means few immediate costs. Eleven weeks on the market with no reduction at all is the tell — the price is wrong rather than the house, and the agent will know it by now. No utility and no office in a three-bed is a real compromise, so let that carry the argument: open at £398k, ceiling £420k, and be genuinely willing to walk."},
-
-{id:90625965,area:"Lower Arncott",addr:"Willow Brook, Ploughley Road, Lower Arncott",out:"OX25",beds:4,size:1184,agent:"iad, avocado property team",listed:"Reduced 6 Jun 2026",days:111,status:"Available",
- score:3,part:1,adv:450000,open:415000,ceil:443000,
- photo:"https://media.rightmove.co.uk/property-photo/c0f677113/90625965/c0f677113e271d35dc6831a0ffccf795.jpeg",
- fp:"https://media.rightmove.co.uk/property-floorplan/a04aa14a2/90625965/a04aa14a26b154c606754ed34ce378dc.jpeg",
- c:["y","y","n","y","p","n"],t:{4:"The second reception room is offered as 'either a dining room or study' — a dual-use room rather than a confirmed office."},
- desc:"Four-bedroom detached in a development of just five houses, with field views to the front over open farmland. Spacious living room opening into a conservatory, re-fitted kitchen with integrated appliances, separate utility room and downstairs WC. Second reception room usable as dining room or study. Main bedroom has an ensuite shower room. Generous rear garden, off-road parking for two vehicles. Footpath across the fields to the Michelin-starred Nut Tree.",
- why:"Field views over open farmland in a five-house development is the sort of setting that does not come back on the market often, and the re-fitted kitchen removes an obvious cost. The honest weaknesses are no garage and no open-plan kitchen/diner — the conservatory partly compensates for the second but not the first. Sixteen weeks on market and already reduced once puts you in a strong position: open at £415k, hold £443k, and price in adding a garage if that matters long-term."},
-
-{id:91798101,area:"Bodicote",addr:"Cotefield Drive, Bodicote",out:"OX15",beds:4,size:null,agent:"Stanbra Powell, Banbury",listed:"Reduced 3 Feb 2026",days:234,status:"Available",
- score:3,part:2,adv:450000,open:405000,ceil:438000,
- photo:"https://media.rightmove.co.uk/property-photo/3ae848a3e/91798101/3ae848a3e86fe02c477d4e1aad8b8e8e.jpeg",
- fp:"https://media.rightmove.co.uk/property-floorplan/d564190dd/91798101/d564190dda1523a99db7f1deb08f07fc.jpeg",
- c:["n","y","p","y","p","y"],t:{2:"A 'kitchen/breakfast room' is listed alongside a separate dining room — a breakfast room is not stated to be open-plan.",4:"A separate dining room is listed and could take a desk, but no office or study is named."},
- desc:"Stone-built four-bedroom detached, built roughly eight years ago by Carla Homes, sold with no onward chain. Entrance hallway, cloakroom with WC and heated towel rail, living room opening onto the rear garden, dining room and kitchen/breakfast room. Three double bedrooms with ensuite to master, one good-size single, family bathroom. Larger-than-average south-facing rear garden, driveway for one to two vehicles and a single garage.",
- why:"The standout here is not the house but the timeline — last reduced in early February, this has been on the market roughly eight months and the seller has been chain-free that whole time. That is the single biggest piece of negotiating leverage on this dashboard. A larger-than-average south-facing garden and stone construction are real positives; the absence of a utility room and any named office are real gaps. Open at £405k without embarrassment and hold £438k."},
-
-{id:90404886,area:"Bicester",addr:"York Close, Bicester OX26",out:"OX26",beds:3,size:976,agent:"Chancellors, Bicester",listed:"Reduced 24 Jun 2026",days:93,status:"Available",
- score:3,part:0,adv:375000,open:350000,ceil:370000,
- photo:"https://media.rightmove.co.uk/property-photo/a4518acea/90404886/a4518aceaf6a2a86a344d6e365109146.jpeg",
- fp:"https://media.rightmove.co.uk/property-floorplan/497c22f55/90404886/497c22f5517840b9b84792cd3aadabd9.png",
- c:["y","n","y","y","n","n"],t:{},
- desc:"Head-of-cul-de-sac position on the established Glory Farm estate, sold with no onward chain. Ground-floor WC/utility room with appliances, engineered oak flooring throughout the ground floor, and a large kitchen/diner created by converting the garage. Re-fitted bathroom with natural stone tile, 2021 Worcester condensing boiler, 2023 integrated Bosch dishwasher. Freshly landscaped private enclosed rear garden, driveway parking. Walking distance to Glory Farm Primary and The Cooper School; 1.1 miles to Bicester North.",
- why:"The cheapest route into Bicester on this list, chain-free, with the boiler, bathroom and kitchen already done — the immediate spend is near zero and both stations are walkable. But read the garage line carefully: it has already been converted, into the kitchen, not an office. So you get the large kitchen/diner and lose the garage permanently, and there is no ensuite. Thirteen weeks on market since the last reduction supports a firm approach — open at £350k, ceiling £370k."},
-
-{id:89575740,area:"Syresham",addr:"Broad Street, Syresham NN13",out:"NN13",beds:3,size:1399,agent:"Boughtons Estate Agents, Brackley",listed:"Reduced 1 Sep 2026",days:24,status:"Available",
- score:3,part:2,adv:325000,open:295000,ceil:320000,
- photo:"https://media.rightmove.co.uk/property-photo/7cbac6392/89575740/7cbac63924cf91800bb2d345426e8fbe.jpeg",
- fp:"https://media.rightmove.co.uk/property-floorplan/a9db41f1a/89575740/a9db41f1aa759bf1c284accc03a8879f.jpeg",
- c:["y","n","p","y","p","y"],t:{2:"No open-plan layout exists today; the listing frames the house as an opportunity to reconfigure, which is potential rather than fact.",4:"No office or study is listed — an office would have to be created as part of the modernisation the agent describes."},
- desc:"Detached 1930s three-bedroom village home on a central plot in Syresham, built by a respected local builder and in the same family for many years. Living room centred on an exposed stone fireplace, kitchen to the rear with a separate utility room, downstairs WC. Three generous bedrooms upstairs. Private rear garden, garage and driveway parking. Needs updating throughout. EPC E, Council Tax D.",
- why:"At £232 per square foot this is by a wide margin the cheapest space on the dashboard, and 1,399 sq ft on a central village plot with a garage gives you room to create the open-plan kitchen/diner and the office rather than buy them. Be realistic about what that means: an EPC E and original everything implies a full refurbishment budget, and you would be living in a building site or renting alongside. Open at £295k, ceiling £320k, and only proceed with a full structural survey and a costed schedule of works."},
-
-{id:172017407,area:"Upper Heyford",addr:"College Square, Upper Heyford",out:"OX25",beds:3,size:1087,agent:"Cridland & Co, Caulcott",listed:"Reduced 10 Jun 2026",days:107,status:"Available",
- score:2,part:0,adv:425000,open:398000,ceil:422000,
- photo:"https://media.rightmove.co.uk/property-photo/6c4c38a7a/172017407/6c4c38a7a1b41c0d480ff7a641957a4d.jpeg",
- fp:"https://media.rightmove.co.uk/property-floorplan/704fd1b50/172017407/704fd1b50d61169147621ba5158601ed.png",
- c:["y","n","n","n","y","n"],t:{},
- desc:"Much-improved period cottage with beams, stone and a fireplace, tucked away on a path with no passing traffic. Large kitchen and utility room, elegant sitting room, conservatory, three bedrooms, bathroom and shower room — and a detached stone outside office in the garden. Quiet village with a well-used hall, green and good pub; Lower Heyford station for Oxford and London Paddington, Bicester North seven miles east.",
- why:"Included as the character option rather than the criteria match, and on one criterion it beats everything else here: a genuine detached stone office in the garden, fully separate from the house, which is a better working setup than any fourth bedroom. Everything else is a compromise — no ensuite, no open-plan kitchen, no ground-floor WC and no garage, which is simply what period cottages are. Fifteen weeks on market since the reduction gives room: open at £398k, ceiling £422k, and only if the working-from-home setup outweighs the rest."}
-];
-
-const money = n => "£" + n.toLocaleString("en-GB");
-function freshClass(d){ return d<=21 ? "hot" : (d>=90 ? "stale" : ""); }
-function freshText(d){
-  if(d<7) return d+"d on market";
-  const w = Math.round(d/7);
-  return w+ (w===1?" week":" weeks") + " on market";
+const P=[{"id": 171346016, "area": "Brackley", "addr": "Orion Drive, Brackley NN13", "out": "NN13", "beds": 4, "size": null, "agent": "Alexander & Co, Brackley", "listed": "Relisted 30 Sep 2026 · first seen 23 Jan", "days": 252, "adv": 475000, "q": "Guide price", "open": 445000, "ceil": 465000, "fp": "https://media.rightmove.co.uk/property-floorplan/f11202758/171346016/f11202758266f14bbdd885c06c583ae9.jpeg", "otm": "16614301", "c": ["y", "y", "y", "y", "y", "y"], "t": {}, "new": true, "desc": "Four-bed detached with three reception rooms, including a study/playroom at the front. Dual-aspect kitchen/dining room with an adjoining utility, downstairs cloakroom, en-suite to bedroom one, garage and driveway.", "why": "A clean 6/6, but it first appeared on Rightmove in January and has just been relisted at a guide price — eight months without a sale at this level is real leverage. Open at £445k and be prepared to go to £465k; it is worth stretching for a full match, but not to the full guide.", "score": 6, "part": 0, "photo": "https://media.rightmove.co.uk/property-photo/ee4d557df/171346016/ee4d557dfafc1cf8a06f3decc895bf50.jpeg", "status": "Available"}, {"id": 93199395, "area": "Brackley", "addr": "Jutland Drive, Brackley NN13", "out": "NN13", "beds": 4, "size": null, "agent": "eXp UK, East of England", "listed": "Added 16 Sep 2026", "days": 16, "adv": 490000, "q": "", "open": 465000, "ceil": 485000, "fp": "https://media.rightmove.co.uk/property-floorplan/668d95954/93199395/668d959541058cef34d7ce1832ba9246.png", "otm": "20347352", "c": ["y", "y", "y", "y", "y", "y"], "t": {}, "new": false, "desc": "Four-bed detached with kitchen/dining room, separate utility, study, cloakroom, en-suite to the master plus family bathroom (three bathrooms in total), and garage.", "why": "Still a 6/6 with three bathrooms, and only two weeks on the market, so the vendor has little reason to move far yet. It sits above the NN13 detached median (£425k), so open at £465k and cap at £485k; if it is still unsold in a month, the room widens.", "score": 6, "part": 0, "photo": "https://media.rightmove.co.uk/property-photo/4675e1081/93199395/4675e1081aa271c3783b4d95b6f243e3.png", "status": "Available"}, {"id": 175019534, "area": "Bicester", "addr": "The Village Close, Upper Arncott, Bicester OX25", "out": "OX25", "beds": 4, "size": null, "agent": "Connells, Bicester", "listed": "Reduced 9 Sep 2026", "days": 65, "adv": 500000, "q": "Offers in excess of", "open": 470000, "ceil": 492000, "fp": "https://media.rightmove.co.uk/property-floorplan/438c96532/175019534/438c96532eead6ef837726a873962f57.jpeg", "otm": "20027027", "c": ["y", "y", "y", "y", "y", "y"], "t": {}, "new": false, "desc": "Village-location four-bed detached: kitchen diner with adjoining utility room, living room and study, four double bedrooms (two with en-suite), family bathroom, ground-floor cloakroom, driveway and garage.", "why": "Full match with two en-suites, but it has been listed nine weeks and already cut once — the 'offers in excess of' wording is a marketing floor, not a fact. Open at £470k, hold firm below £492k. Worth noting Upper Arncott sits right next to Ambrosden, so check you are happy with the location before viewing.", "score": 6, "part": 0, "photo": "https://media.rightmove.co.uk/property-photo/22165bead/175019534/22165bead16b8092315ef93430bb702b.jpeg", "status": "Available"}, {"id": 93055668, "area": "Bloxham", "addr": "Chipperfield Park Road, Bloxham OX15", "out": "OX15", "beds": 4, "size": null, "agent": "Anker & Partners, Banbury", "listed": "Added 11 Sep 2026", "days": 21, "adv": 500000, "q": "", "open": 470000, "ceil": 490000, "fp": "https://media.rightmove.co.uk/property-floorplan/5f6e488eb/93055668/5f6e488eb62f63f4eb755a63a1fdbc66.jpeg", "otm": null, "c": ["y", "y", "y", "y", "p", "y"], "t": {"4": "Three reception rooms (including a snug) — one could serve as an office, but no office or study is named in the listing. Corrected from last week's ✓."}, "new": false, "desc": "Extended four-bed detached in a well-served village: open-plan kitchen/dining room and separate utility, three reception rooms, downstairs WC, en-suite shower, tandem garage and driveway, enclosed rear garden.", "why": "Re-reading the full listing, no office is actually named, so this drops from 6/6 to 5/6 — though a spare reception room makes it an easy fix. At £500k it sits well above the OX15 median (£435k) after three weeks, so open at £470k and stop at £490k.", "score": 5, "part": 1, "photo": "https://media.rightmove.co.uk/property-photo/2dc35056f/93055668/2dc35056f0ea1543118d2853ffa02314.jpeg", "status": "Available"}, {"id": 174409436, "area": "Brackley", "addr": "Miranda Lane, Brackley NN13", "out": "NN13", "beds": 4, "size": null, "agent": "Boughtons Estate Agents, Brackley", "listed": "Relisted 28 Sep 2026 · first seen 14 Apr", "days": 171, "adv": 470000, "q": "Guide price", "open": 440000, "ceil": 460000, "fp": "", "otm": null, "c": ["y", "y", "y", "y", "n", "y"], "t": {}, "new": true, "desc": "2017-built four-bed detached on a corner plot with countryside views. Open-plan kitchen/dining room with peninsula, bay-fronted living room, separate utility, cloakroom/WC, en-suite to the main bedroom, powered garage, EV charger and smart heating.", "why": "Modern, well-specified and a 5/6 — only an office is missing. It has been on and off the market since April, which suggests £470k has not landed. Open at £440k and go to £460k at most. No floorplan has been published yet, so ask the agent for one before viewing.", "score": 5, "part": 0, "photo": "https://media.rightmove.co.uk/property-photo/e4ba09bdd/174409436/e4ba09bdd605078520844a18f62867f3.jpeg", "status": "Available"}, {"id": 93106761, "area": "Bicester", "addr": "Kempton Close, Kingsmere, Bicester OX26", "out": "OX26", "beds": 4, "size": null, "agent": "Taylors Estate Agents, Bicester", "listed": "Added 14 Sep 2026", "days": 18, "adv": 450000, "q": "Offers over", "open": 432000, "ceil": 450000, "fp": "https://media.rightmove.co.uk/property-floorplan/26c68d0e1/93106761/26c68d0e15cf51eb908f1fd1f361ae62.jpeg", "otm": "20328556", "c": ["y", "y", "y", "y", "n", "y"], "t": {}, "new": true, "desc": "Four-bed detached on a corner plot on the Kingsmere development, no onward chain. 19ft dual-aspect living room, kitchen/diner with integrated appliances, utility room and cloakroom, en-suite principal bedroom, walled garden and detached garage.", "why": "Chain-free and a 5/6 at a sensible price for a Kingsmere four-bed — OX26 detached median is about £400k. 'Offers over' makes the agent expect £450k, but being chain-free means the seller wants speed. Open at £432k; don't go past the asking price.", "score": 5, "part": 0, "photo": "https://media.rightmove.co.uk/property-photo/e8565a990/93106761/e8565a9902a5830eb3e4ce25bc7c39ec.jpeg", "status": "Available"}, {"id": 93396087, "area": "Brackley", "addr": "Northampton Road, Brackley NN13", "out": "NN13", "beds": 4, "size": null, "agent": "Boughtons Estate Agents, Brackley", "listed": "Reduced 30 Sep 2026", "days": 11, "adv": 445000, "q": "Offers over", "open": 425000, "ceil": 440000, "fp": "https://media.rightmove.co.uk/property-floorplan/77330ff00/93396087/77330ff00161dd5fd2d7ab05809eda13.jpeg", "otm": null, "c": ["y", "y", "y", "y", "n", "y"], "t": {}, "new": true, "desc": "Four-bed detached family home with a spacious kitchen/diner with island and integral appliances, separate utility room, cloakroom, en-suite to the master and a garage. EPC C.", "why": "Reduced within ten days of listing, which usually means a motivated seller or early feedback that it was over-priced. It's a 5/6 just under the NN13 median band for four-beds. Open at £425k and cap at £440k — there's no reason to pay the full 'offers over' figure.", "score": 5, "part": 0, "photo": "https://media.rightmove.co.uk/property-photo/9d1f47bab/93396087/9d1f47bab6ba59235b1ee4621e0866bc.jpeg", "status": "Available"}, {"id": 88328520, "area": "Heyford", "addr": "Williams Road, Upper Heyford OX25", "out": "OX25", "beds": 4, "size": null, "agent": "IMS Property Solutions, Bicester", "listed": "Reduced 28 Jul 2026", "days": 144, "adv": 490000, "q": "Guide price", "open": 455000, "ceil": 475000, "fp": "https://media.rightmove.co.uk/property-floorplan/48e3b660f/88328520/48e3b660f7ef7a6d841bb53d79cbb6d7.jpeg", "otm": null, "c": ["n", "y", "y", "y", "y", "p"], "t": {"5": "Key features list a 'separate study area in the garage' alongside tandem driveway parking — part of the garage has been given over to the study, so full garage use isn't confirmed."}, "new": true, "desc": "Four-bed detached at Heyford Park with open-plan lounge/dining/kitchen and bi-fold doors, downstairs WC, en-suite to the principal bedroom, and a separate study area in the garage. Close to Heyford School.", "why": "Nearly five months on the market with one reduction already — the seller has had time to get realistic. No utility, and the garage doubles as a study, so it's a 4/6. Open at £455k and walk away above £475k.", "score": 4, "part": 1, "photo": "https://media.rightmove.co.uk/property-photo/d451a8751/88328520/d451a875195e5f31b11f61d3a793844c.jpeg", "status": "Available"}, {"id": 92526942, "area": "Bloxham", "addr": "Wiggins Close, Bloxham OX15", "out": "OX15", "beds": 4, "size": null, "agent": "Anker & Partners, Banbury", "listed": "Added 28 Aug 2026", "days": 35, "adv": 485000, "q": "", "open": 460000, "ceil": 478000, "fp": "https://media.rightmove.co.uk/property-floorplan/c2af896f4/92526942/c2af896f44ed34eb6a6ddd2dbbc48cac.jpeg", "otm": null, "c": ["p", "y", "y", "y", "y", "y"], "t": {"0": "Listed as 'downstairs cloakroom with utility' — a combined cloakroom/utility space, not a separate utility room."}, "new": true, "desc": "Four double bedrooms in a quiet cul-de-sac in Bloxham village. Modern kitchen/diner with integrated appliances, study, downstairs cloakroom with utility, en-suite plus family bathroom, garage and driveway, mature rear garden.", "why": "A strong village option: 5/6 with a real study, but the utility is shared with the cloakroom. Five weeks listed with no reduction yet. Open at £460k and go to £478k at most.", "score": 5, "part": 1, "photo": "https://media.rightmove.co.uk/property-photo/6d9a00fc4/92526942/6d9a00fc4dd9fac45598891a6b8dbf28.jpeg", "status": "Available"}, {"id": 90290859, "area": "Brackley", "addr": "Lagonda Drive, Brackley NN13", "out": "NN13", "beds": 4, "size": 1481, "agent": "Alexander & Co, Brackley", "listed": "Reduced 28 Aug 2026", "days": 94, "adv": 465000, "q": "Guide price", "open": 440000, "ceil": 458000, "fp": "https://media.rightmove.co.uk/property-floorplan/f29261176/90290859/f292611769e2ab5e43f9841d0fd7f9f3.jpeg", "otm": "19824757", "c": ["y", "y", "y", "y", "n", "y"], "t": {}, "new": false, "desc": "1,481 sq ft four-bed detached with kitchen/diner, utility, cloakroom, en-suite and garage.", "why": "Good space for the money at about £314/sq ft, and three months on the market with one reduction. Only an office is missing. Open at £440k and stop at £458k.", "score": 5, "part": 0, "photo": "https://media.rightmove.co.uk/property-photo/0b654d878/90290859/0b654d878d9225be31cb58b0ce149e6b.jpeg", "status": "Available"}, {"id": 92493582, "area": "Heyford", "addr": "Nash Road, Heyford Park OX25", "out": "OX25", "beds": 3, "size": 964, "agent": "Barton Fleming, Bicester", "listed": "Added 28 Aug 2026", "days": 35, "adv": 425000, "q": "Guide price", "open": 405000, "ceil": 420000, "fp": "https://media.rightmove.co.uk/property-floorplan/1cae720ab/92493582/1cae720ab1470db49c15bea835682013.jpeg", "otm": null, "c": ["y", "y", "y", "y", "n", "y"], "t": {}, "new": false, "desc": "964 sq ft three-bed detached at Heyford Park with kitchen/diner, utility, cloakroom, en-suite and garage.", "why": "A cheaper 5/6, but small at 964 sq ft, so £425k is a high price per foot (£441). Open at £405k and keep the ceiling at £420k; the 4-beds above give more space for similar money. OTM link omitted because a second Nash Road house is listed at the same price.", "score": 5, "part": 0, "photo": "https://media.rightmove.co.uk/property-photo/4bdad96c2/92493582/4bdad96c22ee56e7968e3a31b65c8489.jpeg", "status": "Available"}, {"id": 92587044, "area": "Brackley", "addr": "Utah Lane, Brackley NN13", "out": "NN13", "beds": 4, "size": null, "agent": "eXp UK, East of England", "listed": "Added 26 May 2026", "days": 129, "adv": 500000, "q": "Offers over", "open": 462000, "ceil": 485000, "fp": "https://media.rightmove.co.uk/property-floorplan/ff36fb1c3/92587044/ff36fb1c3b4a0efa16167a79c9ead6f4.jpeg", "otm": "17639110", "c": ["y", "y", "y", "y", "p", "y"], "t": {"4": "Listed as a 'separate dining room, currently used as a playroom' and an 'extra reception room' — a flexible space rather than a confirmed office."}, "new": false, "desc": "Four-bed detached with kitchen/diner, utility, cloakroom, en-suite, garage, a separate dining room and an extra reception room.", "why": "Now over 18 weeks on the market at 'offers over' £500k with no reduction — that asking price is not working. Open at £462k and don't pay more than £485k.", "score": 5, "part": 1, "photo": "https://media.rightmove.co.uk/property-photo/af335a500/92587044/af335a5008dfbff11888a426b4c9ee23.jpeg", "status": "Available"}, {"id": 91137870, "area": "Brackley", "addr": "Beech Drive, Brackley NN13", "out": "NN13", "beds": 4, "size": 1195, "agent": "Century 21 Fine Homes and Estates, Winchester", "listed": "Reduced 24 Aug 2026", "days": 73, "adv": 437999, "q": "Guide price", "open": 415000, "ceil": 432000, "fp": "https://media.rightmove.co.uk/property-floorplan/59958e93b/91137870/59958e93bcd4f5a963e40bdafb28a461.jpeg", "otm": null, "c": ["y", "y", "p", "y", "y", "n"], "t": {"2": "Described as a 'modern kitchen' with a separate 'open plan dining area' joining the living room and conservatory — not confirmed as a kitchen/diner.", "5": "The garage area has been converted into extra living space."}, "new": true, "desc": "Four bedrooms plus a study, two reception rooms and a conservatory. Modern kitchen with separate utility, ground-floor WC, en-suite to the master, and a large high-quality log cabin in a south-east-facing garden.", "why": "One of the cheaper four-beds with a real study, utility and en-suite, plus a log cabin that could work as a garden office. The garage has gone, though. It's been ten weeks on the market and already reduced, and the agent is out of area (Winchester). Open at £415k with a ceiling of £432k.", "score": 4, "part": 1, "photo": "https://media.rightmove.co.uk/property-photo/676343646/91137870/6763436464bd897213f46536d93d5220.jpeg", "status": "Available"}, {"id": 88228395, "area": "Middle Barton", "addr": "Worton Road, Middle Barton OX7", "out": "OX7", "beds": 4, "size": null, "agent": "Mark David Estate Agents, Deddington", "listed": "Reduced 14 Sep 2026", "days": 147, "adv": 425000, "q": "Guide price", "open": 400000, "ceil": 418000, "fp": "https://media.rightmove.co.uk/property-floorplan/c58822eca/88228395/c58822eca78e75f6bc6c3c91525df034.jpeg", "otm": "19437459", "c": ["y", "n", "p", "y", "y", "y"], "t": {"2": "A 'kitchen/breakfast room' is listed with a separate sun room and reception — a breakfast room isn't stated to be an open-plan kitchen/diner."}, "new": true, "desc": "Village four-bed detached with an office off the hallway, kitchen/breakfast room, larger utility room, cloakroom, sun room, separate reception room and integral garage.", "why": "This week's village find: an office, utility and garage for £425k in a well-served village, and it's well under the OX7 detached median (£523k). There's no en-suite and only one bathroom. It's been five months on the market and was reduced in mid-September, so open at £400k and stop at £418k.", "score": 4, "part": 1, "photo": "https://media.rightmove.co.uk/property-photo/6366dcc7b/88228395/6366dcc7b0e84f404411aba110819e6e.jpeg", "status": "Available"}, {"id": 166635992, "area": "Brackley", "addr": "Wappenham Road, Helmdon NN13", "out": "NN13", "beds": 4, "size": 1705, "agent": "Quadrant, Bicester", "listed": "Reduced 14 Sep 2026", "days": 392, "adv": 490000, "q": "Offers in excess of", "open": 450000, "ceil": 470000, "fp": "https://media.rightmove.co.uk/property-floorplan/08dc1d195/166635992/08dc1d195d46b29e203845471f1a368e.jpeg", "otm": null, "c": ["y", "y", "p", "y", "p", "y"], "t": {"2": "Key features say 'kitchen/dining room' but the main description lists a separate 'dining room, kitchen' — the two contradict, so this is not treated as confirmed open-plan.", "4": "A 'dining/extra reception room' is listed, which would serve as an office, but no office or study is named."}, "new": false, "desc": "1,705 sq ft four-bed village house with utility, en-suite, cloakroom, garage, and a dining/extra reception room.", "why": "The biggest house here at about £287/sq ft, but it has been listed for over a year with reductions — the seller needs a buyer. Open at £450k and cap at £470k. OTM link omitted because two OnTheMarket listings match this street and price.", "score": 4, "part": 2, "photo": "https://media.rightmove.co.uk/property-photo/b7377d60e/166635992/b7377d60e32fc702a473fd0cbf69e352.jpeg", "status": "Available"}, {"id": 172385027, "area": "Bicester", "addr": "Hawksmead, Bicester OX26", "out": "OX26", "beds": 3, "size": null, "agent": "Barton Fleming, Bicester", "listed": "Reduced 29 Sep 2026", "days": 225, "adv": 415000, "q": "", "open": 395000, "ceil": 408000, "fp": "https://media.rightmove.co.uk/property-floorplan/7b3b3ec3b/172385027/7b3b3ec3b06d1b37c98a31a9bcd80764.jpeg", "otm": null, "c": ["n", "y", "y", "y", "n", "y"], "t": {}, "new": false, "desc": "Three-bed detached with kitchen/diner, cloakroom, en-suite and garage. No utility or office named.", "why": "Cut from £425k to £415k this week after more than seven months listed. At 4/6 it's a budget fallback rather than a target. Open at £395k and stop at £408k.", "score": 4, "part": 0, "photo": "https://media.rightmove.co.uk/property-photo/6745145ea/172385027/6745145ea66e95a55a384f4a2b40ab54.jpeg", "status": "Available"}];
+const CN=["Utility room","Master ensuite","Open-plan kitchen/diner","WC every floor","Office","Garage"];
+const f=v=>"£"+v.toLocaleString("en-GB");
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+let area="All",sort="score";
+function card(p){
+ const chips=p.c.map((v,i)=>{const sym=v==="y"?"✓":v==="p"?"~":"✗";const tt=p.t[i]?` title="${esc(p.t[i])}"`:"";return `<span class="chip ${v}"${tt}>${sym} ${CN[i]}</span>`}).join("");
+ const fr=p.days<=14?"hot":p.days>=120?"stale":"";
+ const links=[`<a href="https://www.rightmove.co.uk/properties/${p.id}" target="_blank" rel="noopener">Rightmove</a>`];
+ if(p.otm)links.push(`<a href="https://www.onthemarket.com/details/${p.otm}/" target="_blank" rel="noopener">OnTheMarket</a>`);
+ if(p.fp)links.push(`<a href="${p.fp}" target="_blank" rel="noopener">Floorplan</a>`);
+ return `<div class="card"><div class="ph"><img loading="lazy" src="${p.photo}" alt="${esc(p.addr)}"><div class="badge">${p.score}/6${p.part?` <span class="p">+${p.part}~</span>`:""}</div><div class="fresh ${fr}">${p.new?"NEW · ":""}${p.days}d on market</div></div>
+ <div class="body"><div><div class="addr">${esc(p.addr)}</div><div class="meta">${p.beds} bed detached${p.size?` · ${p.size.toLocaleString()} sq ft`:""} · ${esc(p.agent)} · ${esc(p.listed)}</div></div>
+ <div class="prices"><div class="pc"><div class="v">${f(p.adv)}</div><div class="k">${p.q?esc(p.q):"Advertised"}</div></div><div class="pc open"><div class="v">${f(p.open)}</div><div class="k">Opening offer</div></div><div class="pc ceil"><div class="v">${f(p.ceil)}</div><div class="k">Ceiling</div></div></div>
+ <div class="chips">${chips}</div><div class="desc">${esc(p.desc)}</div><div class="why">${esc(p.why)}</div><div class="links">${links.join("")}</div></div></div>`;
 }
-
-// ---- stats ----
-const avgScore = (P.reduce((s,p)=>s+p.score,0)/P.length).toFixed(1);
-const six = P.filter(p=>p.score===6).length;
-const avgAdv = Math.round(P.reduce((s,p)=>s+p.adv,0)/P.length);
-const room = Math.round(P.reduce((s,p)=>s+(p.adv-p.open),0)/P.length);
-document.getElementById("stats").innerHTML = [
- [P.length,"Shortlisted"],
- [six,"Confirmed 6/6"],
- [avgScore+" /6","Avg score"],
- [money(avgAdv),"Avg advertised"],
- [money(room),"Avg opening gap"],
- ["17 / 17","Available today"]
-].map(([n,l])=>`<div class="stat"><div class="n">${n}</div><div class="l">${l}</div></div>`).join("");
-
-// ---- controls ----
-const areas = ["All", ...[...new Set(P.map(p=>p.area))].sort()];
-document.getElementById("controls").innerHTML =
- areas.map((a,i)=>`<button class="fbtn${i===0?" on":""}" data-a="${a}">${a}</button>`).join("") +
- `<select id="sort">
-    <option value="score">Sort: best match</option>
-    <option value="room">Sort: biggest negotiation room</option>
-    <option value="asc">Sort: price low to high</option>
-    <option value="desc">Sort: price high to low</option>
-    <option value="fresh">Sort: newest listed</option>
-    <option value="stale">Sort: longest on market</option>
-    <option value="sqft">Sort: cheapest per sq ft</option>
-  </select>`;
-
-let filt = "All", sort = "score";
-
 function render(){
-  let list = P.filter(p => filt==="All" || p.area===filt);
-  const gap = p => (p.adv-p.open)/p.adv;
-  const psf = p => p.size ? p.adv/p.size : Infinity;
-  list.sort((a,b)=>({
-    score: ()=> b.score-a.score || b.part-a.part || a.adv-b.adv,
-    room:  ()=> gap(b)-gap(a) || b.days-a.days,
-    asc:   ()=> a.adv-b.adv,
-    desc:  ()=> b.adv-a.adv,
-    fresh: ()=> a.days-b.days,
-    stale: ()=> b.days-a.days,
-    sqft:  ()=> psf(a)-psf(b)
-  }[sort])());
-
-  document.getElementById("grid").innerHTML = list.length ? list.map(p=>`
-    <article class="card">
-      <div class="ph">
-        <img src="${p.photo}" alt="${p.addr}" loading="lazy">
-        <div class="badge">${p.score}/6${p.part?` <span class="p">+${p.part}~</span>`:""}</div>
-        <div class="fresh ${freshClass(p.days)}">${freshText(p.days)}</div>
-      </div>
-      <div class="body">
-        <div>
-          <div class="addr">${p.addr}</div>
-          <div class="meta">${p.beds} bed · ${p.out}${p.size?` · ${p.size.toLocaleString("en-GB")} sq ft · £${Math.round(p.adv/p.size)}/sq ft`:""} · ${p.status}<br>${p.agent} · ${p.listed}</div>
-        </div>
-        <div class="prices">
-          <div class="pc"><div class="v">${money(p.adv)}</div><div class="k">Advertised</div></div>
-          <div class="pc open"><div class="v">${money(p.open)}</div><div class="k">Open at</div></div>
-          <div class="pc ceil"><div class="v">${money(p.ceil)}</div><div class="k">Ceiling</div></div>
-        </div>
-        <div class="chips">${p.c.map((v,i)=>{
-          const cls = v==="y"?"y":(v==="p"?"p":"n");
-          const mark = v==="y"?"✓":(v==="p"?"~":"✗");
-          const tip = v==="p" ? ` title="${(p.t[i]||"Hedged or partial wording in the listing — not counted in the score.").replace(/"/g,"&quot;")}"` : "";
-          return `<span class="chip ${cls}"${tip}>${mark} ${C[i]}</span>`;
-        }).join("")}</div>
-        <div class="desc">${p.desc}</div>
-        <div class="why">${p.why}</div>
-        <div class="links">
-          <a href="https://www.rightmove.co.uk/properties/${p.id}" target="_blank" rel="noopener">Rightmove listing</a>
-          <a href="${p.fp}" target="_blank" rel="noopener">Floorplan</a>
-          <a href="https://www.rightmove.co.uk/house-prices/${p.out.toLowerCase()}.html?propertyType=DETACHED&soldIn=2" target="_blank" rel="noopener">${p.out} sold prices</a>
-        </div>
-      </div>
-    </article>`).join("") : `<div class="empty">No properties in this area.</div>`;
+ let L=P.filter(p=>area==="All"||p.area===area);
+ const S={score:(a,b)=>b.score-a.score||b.part-a.part||a.adv-b.adv,room:(a,b)=>(b.adv-b.open)-(a.adv-a.open),lo:(a,b)=>a.adv-b.adv,hi:(a,b)=>b.adv-a.adv,new:(a,b)=>a.days-b.days,old:(a,b)=>b.days-a.days};
+ L.sort(S[sort]);
+ document.getElementById("grid").innerHTML=L.length?L.map(card).join(""):'<div class="empty">No listings in this area.</div>';
 }
-
-document.getElementById("controls").addEventListener("click", e=>{
-  const b = e.target.closest(".fbtn"); if(!b) return;
-  document.querySelectorAll(".fbtn").forEach(x=>x.classList.remove("on"));
-  b.classList.add("on"); filt = b.dataset.a; render();
-});
-document.getElementById("sort").addEventListener("change", e=>{ sort = e.target.value; render(); });
+document.getElementById("ctl").addEventListener("click",e=>{const b=e.target.closest(".fbtn");if(!b)return;area=b.dataset.a;document.querySelectorAll(".fbtn").forEach(x=>x.classList.toggle("on",x===b));render();});
+document.getElementById("sort").addEventListener("change",e=>{sort=e.target.value;render();});
 render();
-</script>
-</body>
-</html>
+</script></body></html>
